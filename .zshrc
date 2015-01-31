@@ -8,8 +8,6 @@ zstyle ':completion:*' menu select=5
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle :compinstall filename '/home/robb/.zshrc'
 
-[[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
-
 autoload -Uz compinit
 compinit
 
@@ -31,9 +29,6 @@ case "$TERM" in
     export PROMPT="%{$fg[blue]%}[@%m %c]$ %{$reset_color%}"
     ;;
 esac
-
-# fasd
-eval "$(fasd --init auto)"
 
 # the best prompt
 # example: [@robb downloads]$
@@ -89,32 +84,14 @@ bindkey -e
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
-# COLORED LS, IT MAKES YOU SMARTER
+# aliases
 alias ls='ls --color=always'
-
-# never remember what this fucking thing is called
-alias irc="weechat-curses"
-
-# there'll be time to type sudo when I'm dead
-alias pacman="sudo pacman"
-
-# do u have any idea how much time this will save me
-# over a lifetime, tens of seconds
-# TENS OF SECONDS
-alias upd="pacman -Su"
+alias add="sudo yum install"
 
 ezcp() {
     sudo cp -r $1 $2 & disown
 }
 
-alias d3="wine ~/.wine/drive_c/Program\ Files/Diablo\ III/Diablo\ III.exe -launch -opengl"
-alias bar="conky | ruby ~/statusbar.rb | dzen2 -x 200 -xs 1 -fn Inconsolata-8 -ta r &"
-alias winekill="sudo killall wineserver services.exe winedevice.exe explorer.exe Diablo\ III.exe"
-# "compile slow, run fast." - family motto
-# export CFLAGS="-O3 -funsafe-loop-optimizations -ffast-math -march=native -pipe"
-# export CXXFLAGS=${CFLAGS}
-# export LDFLAGS=${CFLAGS}
-# "get in your home, ball"
 export 
 PATH=/home/rps/sh:/home/rps/bin:/home/rps/.gem/ruby/2.0.0/bin:/home/rps/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/bin:~/.cabal/bin:~/.scripts:/usr/lib32/smlnj/bin:/home/rps/.gem/ruby/2.1.0/bin:$PATH
 export SMLNJ_HOME=/usr/lib32/smlnj
@@ -125,157 +102,3 @@ export CC="clang"
 export EDITOR="emacsclient"
 export LANG="en_US.UTF-8"
 
-
-eval `dircolors ~/.dircolors/dircolors.256dark`
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-# gc
-prefixes=(5 6 8)
-for p in $prefixes; do
-	compctl -g "*.${p}" ${p}l
-	compctl -g "*.go" ${p}g
-done
-
-# standard go tools
-compctl -g "*.go" gofmt
-
-# gccgo
-compctl -g "*.go" gccgo
-
-# go tool
-__go_tool_complete() {
-  typeset -a commands build_flags
-  commands+=(
-    'build[compile packages and dependencies]'
-    'clean[remove object files]'
-    'doc[run godoc on package sources]'
-    'fix[run go tool fix on packages]'
-    'fmt[run gofmt on package sources]'
-    'get[download and install packages and dependencies]'
-    'help[display help]'
-    'install[compile and install packages and dependencies]'
-    'list[list packages]'
-    'run[compile and run Go program]'
-    'test[test packages]'
-    'tool[run specified go tool]'
-    'version[print Go version]'
-    'vet[run go tool vet on packages]'
-  )
-  if (( CURRENT == 2 )); then
-    # explain go commands
-    _values 'go tool commands' ${commands[@]}
-    return
-  fi
-  build_flags=(
-    '-a[force reinstallation of packages that are already up-to-date]'
-    '-n[print the commands but do not run them]'
-    "-p[number of parallel builds]:number"
-    '-x[print the commands]'
-    "-work[print temporary directory name and keep it]"
-    "-gcflags[flags for 5g/6g/8g]:flags"
-    "-ldflags[flags for 5l/6l/8l]:flags"
-    "-gccgoflags[flags for gccgo]:flags"
-  )
-  __go_list() {
-      local expl importpaths
-      declare -a importpaths
-      importpaths=($(go list ${words[$CURRENT]}... 2>/dev/null))
-      _wanted importpaths expl 'import paths' compadd "$@" - "${importpaths[@]}"
-  }
-  case ${words[2]} in
-  clean|doc)
-      _arguments -s -w : '*:importpaths:__go_list'
-      ;;
-  fix|fmt|list|vet)
-      _alternative ':importpaths:__go_list' ':files:_path_files -g "*.go"'
-      ;;
-  install)
-      _arguments -s -w : ${build_flags[@]} \
-        "-v[show package names]" \
-	'*:importpaths:__go_list'
-      ;;
-  get)
-      _arguments -s -w : \
-        ${build_flags[@]}
-      ;;
-  build)
-      _arguments -s -w : \
-        ${build_flags[@]} \
-        "-v[show package names]" \
-        "-o[output file]:file:_files" \
-        "*:args:{ _alternative ':importpaths:__go_list' ':files:_path_files -g \"*.go\"' }"
-      ;;
-  test)
-      _arguments -s -w : \
-        ${build_flags[@]} \
-        "-c[do not run, compile the test binary]" \
-        "-i[do not run, install dependencies]" \
-        "-v[print test output]" \
-        "-x[print the commands]" \
-        "-short[use short mode]" \
-        "-parallel[number of parallel tests]:number" \
-        "-cpu[values of GOMAXPROCS to use]:number list" \
-        "-run[run tests and examples matching regexp]:regexp" \
-        "-bench[run benchmarks matching regexp]:regexp" \
-        "-benchtime[run each benchmark during n seconds]:duration" \
-        "-timeout[kill test after that duration]:duration" \
-        "-cpuprofile[write CPU profile to file]:file:_files" \
-        "-memprofile[write heap profile to file]:file:_files" \
-        "-memprofilerate[set heap profiling rate]:number" \
-        "*:args:{ _alternative ':importpaths:__go_list' ':files:_path_files -g \"*.go\"' }"
-      ;;
-  help)
-      _values "${commands[@]}" \
-        'gopath[GOPATH environment variable]' \
-        'importpath[description of import paths]' \
-        'remote[remote import path syntax]' \
-        'testflag[description of testing flags]' \
-        'testfunc[description of testing functions]'
-      ;;
-  run)
-      _arguments -s -w : \
-          ${build_flags[@]} \
-          '*:file:_path_files -g "*.go"'
-      ;;
-  tool)
-      if (( CURRENT == 3 )); then
-          _values "go tool" $(go tool)
-          return
-      fi
-      case ${words[3]} in
-      [568]g)
-          _arguments -s -w : \
-              '-I[search for packages in DIR]:includes:_path_files -/' \
-              '-L[show full path in file:line prints]' \
-              '-S[print the assembly language]' \
-              '-V[print the compiler version]' \
-              '-e[no limit on number of errors printed]' \
-              '-h[panic on an error]' \
-              '-l[disable inlining]' \
-              '-m[print optimization decisions]' \
-              '-o[file specify output file]:file' \
-              '-p[assumed import path for this code]:importpath' \
-              '-u[disable package unsafe]' \
-              "*:file:_files -g '*.go'"
-          ;;
-      [568]l)
-          local O=${words[3]%l}
-          _arguments -s -w : \
-              '-o[file specify output file]:file' \
-              '-L[search for packages in DIR]:includes:_path_files -/' \
-              "*:file:_files -g '*.[ao$O]'"
-          ;;
-      dist)
-          _values "dist tool" banner bootstrap clean env install version
-          ;;
-      *)
-          # use files by default
-          _files
-          ;;
-      esac
-      ;;
-  esac
-}
-
-compdef __go_tool_complete go
