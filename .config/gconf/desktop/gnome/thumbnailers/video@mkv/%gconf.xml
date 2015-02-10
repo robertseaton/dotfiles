@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="enable" mtime="1423457690" type="bool" value="true"/>
+	<entry name="command" mtime="1423457690" type="string">
+		<stringvalue>/usr/bin/ffmpegthumbnailer -s %s -i %i -o %o -c png -f -t 10</stringvalue>
+	</entry>
+</gconf>

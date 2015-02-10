@@ -15,3 +15,7 @@ add .xmonad
 add .Xresources
 add .Xdefaults
 add .fonts.conf
+add .i3
+add .i3status.conf
+add .config
+add .ncmpcpp

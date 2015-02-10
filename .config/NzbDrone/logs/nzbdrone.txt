@@ -1,0 +1,1948 @@
+15-2-3 20:39:55.9|Info|Bootstrap|Starting NzbDrone - /usr/lib/sonarr/NzbDrone.exe - Version 2.0.0.2722
+15-2-3 20:39:56.5|Debug|ProcessProvider|Found 0 processes with the name: NzbDrone.Console
+15-2-3 20:39:56.7|Debug|ProcessProvider|Found 1 processes with the name: NzbDrone
+15-2-3 20:39:56.8|Info|MigrationLogger|*** Migrating data source=/home/rps/.config/NzbDrone/nzbdrone.db;cache size=-10485760;datetimekind=Utc;journal mode=Wal;pooling=True;version=3 ***
+15-2-3 20:39:57.0|Info|MigrationLogger|*** VersionMigration migrating ***
+15-2-3 20:39:57.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.0|Debug|MigrationLogger|CreateTable VersionInfo
+15-2-3 20:39:57.0|Debug|MigrationLogger|CREATE TABLE "VersionInfo" ("Version" INTEGER NOT NULL)
+15-2-3 20:39:57.0|Debug|MigrationLogger|Took: 00:00:00.0090280
+15-2-3 20:39:57.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.0|Debug|MigrationLogger|VersionMigration migrated
+15-2-3 20:39:57.0|Debug|MigrationLogger|Took: 00:00:00.0366010
+15-2-3 20:39:57.1|Info|MigrationLogger|*** VersionUniqueMigration migrating ***
+15-2-3 20:39:57.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.1|Debug|MigrationLogger|CreateIndex VersionInfo (Version)
+15-2-3 20:39:57.1|Debug|MigrationLogger|CREATE UNIQUE INDEX "UC_Version" ON "VersionInfo" ("Version" ASC)
+15-2-3 20:39:57.1|Debug|MigrationLogger|Took: 00:00:00.0018340
+15-2-3 20:39:57.1|Debug|MigrationLogger|AlterTable VersionInfo
+15-2-3 20:39:57.1|Debug|MigrationLogger|
+15-2-3 20:39:57.1|Debug|MigrationLogger|Took: 00:00:00.0003240
+15-2-3 20:39:57.1|Debug|MigrationLogger|CreateColumn VersionInfo AppliedOn DateTime
+15-2-3 20:39:57.1|Debug|MigrationLogger|ALTER TABLE "VersionInfo" ADD COLUMN "AppliedOn" DATETIME
+15-2-3 20:39:57.1|Debug|MigrationLogger|Took: 00:00:00.0008010
+15-2-3 20:39:57.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.2|Debug|MigrationLogger|VersionUniqueMigration migrated
+15-2-3 20:39:57.2|Debug|MigrationLogger|Took: 00:00:00.0529540
+15-2-3 20:39:57.2|Info|MigrationLogger|*** VersionDescriptionMigration migrating ***
+15-2-3 20:39:57.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.2|Debug|MigrationLogger|AlterTable VersionInfo
+15-2-3 20:39:57.2|Debug|MigrationLogger|
+15-2-3 20:39:57.2|Debug|MigrationLogger|Took: 00:00:00.0001800
+15-2-3 20:39:57.2|Debug|MigrationLogger|CreateColumn VersionInfo Description String
+15-2-3 20:39:57.2|Debug|MigrationLogger|ALTER TABLE "VersionInfo" ADD COLUMN "Description" TEXT
+15-2-3 20:39:57.2|Debug|MigrationLogger|Took: 00:00:00.0004880
+15-2-3 20:39:57.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.2|Debug|MigrationLogger|VersionDescriptionMigration migrated
+15-2-3 20:39:57.2|Debug|MigrationLogger|Took: 00:00:00.0775650
+15-2-3 20:39:57.3|Info|MigrationLogger|*** 1: InitialSetup migrating ***
+15-2-3 20:39:57.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.3|Info|InitialSetup|Starting migration  to 1
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable Config
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "Config" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Key" TEXT NOT NULL, "Value" TEXT NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0009120
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex Config (Key)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Config_Key" ON "Config" ("Key" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0007210
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable RootFolders
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "RootFolders" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Path" TEXT NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0006220
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex RootFolders (Path)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_RootFolders_Path" ON "RootFolders" ("Path" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005670
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable Series
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "Series" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvdbId" INTEGER NOT NULL, "TvRageId" INTEGER NOT NULL, "ImdbId" TEXT NOT NULL, "Title" TEXT NOT NULL, "TitleSlug" TEXT NOT NULL, "CleanTitle" TEXT NOT NULL, "Status" INTEGER NOT NULL, "Overview" TEXT, "AirTime" TEXT, "Images" TEXT NOT NULL, "Path" TEXT NOT NULL, "Monitored" INTEGER NOT NULL, "QualityProfileId" INTEGER NOT NULL, "SeasonFolder" INTEGER NOT NULL, "LastInfoSync" DATETIME, "LastDiskSync" DATETIME, "Runtime" INTEGER NOT NULL, "SeriesType" INTEGER NOT NULL, "BacklogSetting" INTEGER NOT NULL, "Network" TEXT, "CustomStartDate" DATETIME, "UseSceneNumbering" INTEGER NOT NULL, "FirstAired" DATETIME, "NextAiring" DATETIME)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0023320
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex Series (TvdbId)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvdbId" ON "Series" ("TvdbId" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005550
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex Series (TvRageId)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvRageId" ON "Series" ("TvRageId" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005500
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex Series (ImdbId)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_ImdbId" ON "Series" ("ImdbId" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005810
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex Series (TitleSlug)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TitleSlug" ON "Series" ("TitleSlug" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005560
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable Seasons
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "Seasons" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL, "Ignored" INTEGER NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0007530
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable Episodes
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "Episodes" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvDbEpisodeId" INTEGER NOT NULL, "SeriesId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL, "EpisodeNumber" INTEGER NOT NULL, "Title" TEXT, "Overview" TEXT, "Ignored" INTEGER, "EpisodeFileId" INTEGER, "AirDate" DATETIME, "AbsoluteEpisodeNumber" INTEGER, "SceneAbsoluteEpisodeNumber" INTEGER, "SceneSeasonNumber" INTEGER, "SceneEpisodeNumber" INTEGER)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0014940
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex Episodes (TvDbEpisodeId)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Episodes_TvDbEpisodeId" ON "Episodes" ("TvDbEpisodeId" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005880
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable EpisodeFiles
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "EpisodeFiles" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "Path" TEXT NOT NULL, "Quality" TEXT NOT NULL, "Size" INTEGER NOT NULL, "DateAdded" DATETIME NOT NULL, "SeasonNumber" INTEGER NOT NULL, "SceneName" TEXT, "ReleaseGroup" TEXT)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0011040
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex EpisodeFiles (Path)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_EpisodeFiles_Path" ON "EpisodeFiles" ("Path" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005320
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable History
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "History" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "EpisodeId" INTEGER NOT NULL, "SeriesId" INTEGER NOT NULL, "NzbTitle" TEXT NOT NULL, "Date" DATETIME NOT NULL, "Quality" TEXT NOT NULL, "Indexer" TEXT NOT NULL, "NzbInfoUrl" TEXT, "ReleaseGroup" TEXT)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0010060
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable Notifications
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "Notifications" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Name" TEXT NOT NULL, "OnGrab" INTEGER NOT NULL, "OnDownload" INTEGER NOT NULL, "Settings" TEXT NOT NULL, "Implementation" TEXT NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0047590
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable ScheduledTasks
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "ScheduledTasks" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TypeName" TEXT NOT NULL, "Interval" INTEGER NOT NULL, "LastExecution" DATETIME NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0007520
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex ScheduledTasks (TypeName)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_ScheduledTasks_TypeName" ON "ScheduledTasks" ("TypeName" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005690
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable Indexers
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "Indexers" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Enable" INTEGER NOT NULL, "Name" TEXT NOT NULL, "Implementation" TEXT NOT NULL, "Settings" TEXT)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0007190
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex Indexers (Name)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Indexers_Name" ON "Indexers" ("Name" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0004900
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable QualityProfiles
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "QualityProfiles" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Name" TEXT NOT NULL, "Cutoff" INTEGER NOT NULL, "Allowed" TEXT NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0006750
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex QualityProfiles (Name)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityProfiles_Name" ON "QualityProfiles" ("Name" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005230
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable QualitySizes
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "QualitySizes" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "QualityId" INTEGER NOT NULL, "Name" TEXT NOT NULL, "MinSize" INTEGER NOT NULL, "MaxSize" INTEGER NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0007520
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex QualitySizes (QualityId)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualitySizes_QualityId" ON "QualitySizes" ("QualityId" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005400
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateIndex QualitySizes (Name)
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualitySizes_Name" ON "QualitySizes" ("Name" ASC)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0005110
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable SceneMappings
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "SceneMappings" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "CleanTitle" TEXT NOT NULL, "SceneName" TEXT NOT NULL, "TvdbId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0007790
+15-2-3 20:39:57.3|Debug|MigrationLogger|CreateTable NamingConfig
+15-2-3 20:39:57.3|Debug|MigrationLogger|CREATE TABLE "NamingConfig" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "UseSceneName" INTEGER NOT NULL, "Separator" TEXT NOT NULL, "NumberStyle" INTEGER NOT NULL, "IncludeSeriesTitle" INTEGER NOT NULL, "MultiEpisodeStyle" INTEGER NOT NULL, "IncludeEpisodeTitle" INTEGER NOT NULL, "IncludeQuality" INTEGER NOT NULL, "ReplaceSpaces" INTEGER NOT NULL, "SeasonFolderFormat" TEXT NOT NULL)
+15-2-3 20:39:57.3|Debug|MigrationLogger|Took: 00:00:00.0012510
+15-2-3 20:39:57.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (1, '2015-02-04T02:39:57', 'InitialSetup')
+15-2-3 20:39:57.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.4|Debug|MigrationLogger|1: InitialSetup migrated
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0367060
+15-2-3 20:39:57.4|Info|MigrationLogger|*** 2: remove_tvrage_imdb_unique_constraint migrating ***
+15-2-3 20:39:57.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.4|Info|remove_tvrage_imdb_unique_constraint|Starting migration  to 2
+15-2-3 20:39:57.4|Debug|MigrationLogger|DeleteIndex Series (TvRageId)
+15-2-3 20:39:57.4|Debug|MigrationLogger|DROP INDEX "IX_Series_TvRageId"
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0008440
+15-2-3 20:39:57.4|Debug|MigrationLogger|DeleteIndex Series (ImdbId)
+15-2-3 20:39:57.4|Debug|MigrationLogger|DROP INDEX "IX_Series_ImdbId"
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0004390
+15-2-3 20:39:57.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (2, '2015-02-04T02:39:57', 'remove_tvrage_imdb_unique_constraint')
+15-2-3 20:39:57.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.4|Debug|MigrationLogger|2: remove_tvrage_imdb_unique_constraint migrated
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0199440
+15-2-3 20:39:57.4|Info|MigrationLogger|*** 3: remove_renamed_scene_mapping_columns migrating ***
+15-2-3 20:39:57.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.4|Info|remove_renamed_scene_mapping_columns|Starting migration  to 3
+15-2-3 20:39:57.4|Debug|MigrationLogger|DeleteTable SceneMappings
+15-2-3 20:39:57.4|Debug|MigrationLogger|DROP TABLE "SceneMappings"
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0008740
+15-2-3 20:39:57.4|Debug|MigrationLogger|CreateTable SceneMappings
+15-2-3 20:39:57.4|Debug|MigrationLogger|CREATE TABLE "SceneMappings" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvdbId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL, "SearchTerm" TEXT NOT NULL, "ParseTerm" TEXT NOT NULL)
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0007820
+15-2-3 20:39:57.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (3, '2015-02-04T02:39:57', 'remove_renamed_scene_mapping_columns')
+15-2-3 20:39:57.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.4|Debug|MigrationLogger|3: remove_renamed_scene_mapping_columns migrated
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0230110
+15-2-3 20:39:57.4|Info|MigrationLogger|*** 4: updated_history migrating ***
+15-2-3 20:39:57.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.4|Info|updated_history|Starting migration  to 4
+15-2-3 20:39:57.4|Debug|MigrationLogger|DeleteTable History
+15-2-3 20:39:57.4|Debug|MigrationLogger|DROP TABLE "History"
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0006140
+15-2-3 20:39:57.4|Debug|MigrationLogger|CreateTable History
+15-2-3 20:39:57.4|Debug|MigrationLogger|CREATE TABLE "History" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "EpisodeId" INTEGER NOT NULL, "SeriesId" INTEGER NOT NULL, "SourceTitle" TEXT NOT NULL, "Date" DATETIME NOT NULL, "Quality" TEXT NOT NULL, "Data" TEXT NOT NULL)
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0012660
+15-2-3 20:39:57.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (4, '2015-02-04T02:39:57', 'updated_history')
+15-2-3 20:39:57.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.4|Debug|MigrationLogger|4: updated_history migrated
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0122730
+15-2-3 20:39:57.4|Info|MigrationLogger|*** 5: added_eventtype_to_history migrating ***
+15-2-3 20:39:57.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.4|Info|added_eventtype_to_history|Starting migration  to 5
+15-2-3 20:39:57.4|Debug|MigrationLogger|AlterTable History
+15-2-3 20:39:57.4|Debug|MigrationLogger|
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0002030
+15-2-3 20:39:57.4|Debug|MigrationLogger|CreateColumn History EventType Int32
+15-2-3 20:39:57.4|Debug|MigrationLogger|ALTER TABLE "History" ADD COLUMN "EventType" INTEGER
+15-2-3 20:39:57.4|Debug|MigrationLogger|Took: 00:00:00.0005220
+15-2-3 20:39:57.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (5, '2015-02-04T02:39:57', 'added_eventtype_to_history')
+15-2-3 20:39:57.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.5|Debug|MigrationLogger|5: added_eventtype_to_history migrated
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0110270
+15-2-3 20:39:57.5|Info|MigrationLogger|*** 6: add_index_to_log_time migrating ***
+15-2-3 20:39:57.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.5|Info|add_index_to_log_time|Starting migration  to 6
+15-2-3 20:39:57.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (6, '2015-02-04T02:39:57', 'add_index_to_log_time')
+15-2-3 20:39:57.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.5|Debug|MigrationLogger|6: add_index_to_log_time migrated
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0142790
+15-2-3 20:39:57.5|Info|MigrationLogger|*** 7: add_renameEpisodes_to_naming migrating ***
+15-2-3 20:39:57.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.5|Info|add_renameEpisodes_to_naming|Starting migration  to 7
+15-2-3 20:39:57.5|Debug|MigrationLogger|AlterTable NamingConfig
+15-2-3 20:39:57.5|Debug|MigrationLogger|
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0001950
+15-2-3 20:39:57.5|Debug|MigrationLogger|CreateColumn NamingConfig RenameEpisodes Boolean
+15-2-3 20:39:57.5|Debug|MigrationLogger|ALTER TABLE "NamingConfig" ADD COLUMN "RenameEpisodes" INTEGER
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0005710
+15-2-3 20:39:57.5|Debug|MigrationLogger|ExecuteSqlStatement UPDATE NamingConfig SET RenameEpisodes =~ UseSceneName
+15-2-3 20:39:57.5|Debug|MigrationLogger|UPDATE NamingConfig SET RenameEpisodes =~ UseSceneName
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0005470
+15-2-3 20:39:57.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (7, '2015-02-04T02:39:57', 'add_renameEpisodes_to_naming')
+15-2-3 20:39:57.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.5|Debug|MigrationLogger|7: add_renameEpisodes_to_naming migrated
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0106010
+15-2-3 20:39:57.5|Info|MigrationLogger|*** 8: remove_backlog migrating ***
+15-2-3 20:39:57.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.5|Info|remove_backlog|Starting migration  to 8
+15-2-3 20:39:57.5|Debug|MigrationLogger|DeleteColumn Series BacklogSetting
+15-2-3 20:39:57.5|Debug|MigrationLogger|CREATE TABLE "Series_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvdbId" INTEGER NOT NULL, "TvRageId" INTEGER NOT NULL, "ImdbId" TEXT NOT NULL, "Title" TEXT NOT NULL, "TitleSlug" TEXT NOT NULL, "CleanTitle" TEXT NOT NULL, "Status" INTEGER NOT NULL, "Overview" TEXT, "AirTime" TEXT, "Images" TEXT NOT NULL, "Path" TEXT NOT NULL, "Monitored" INTEGER NOT NULL, "QualityProfileId" INTEGER NOT NULL, "SeasonFolder" INTEGER NOT NULL, "LastInfoSync" DATETIME, "LastDiskSync" DATETIME, "Runtime" INTEGER NOT NULL, "SeriesType" INTEGER NOT NULL, "Network" TEXT, "CustomStartDate" DATETIME, "UseSceneNumbering" INTEGER NOT NULL, "FirstAired" DATETIME, "NextAiring" DATETIME)
+15-2-3 20:39:57.5|Debug|MigrationLogger|INSERT INTO "Series_temp" SELECT "Id", "TvdbId", "TvRageId", "ImdbId", "Title", "TitleSlug", "CleanTitle", "Status", "Overview", "AirTime", "Images", "Path", "Monitored", "QualityProfileId", "SeasonFolder", "LastInfoSync", "LastDiskSync", "Runtime", "SeriesType", "Network", "CustomStartDate", "UseSceneNumbering", "FirstAired", "NextAiring" FROM "Series"
+15-2-3 20:39:57.5|Debug|MigrationLogger|DROP TABLE "Series"
+15-2-3 20:39:57.5|Debug|MigrationLogger|ALTER TABLE "Series_temp" RENAME TO "Series"
+15-2-3 20:39:57.5|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvdbId" ON "Series" ("TvdbId" ASC)
+15-2-3 20:39:57.5|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TitleSlug" ON "Series" ("TitleSlug" ASC)
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0261890
+15-2-3 20:39:57.5|Debug|MigrationLogger|DeleteColumn NamingConfig UseSceneName
+15-2-3 20:39:57.5|Debug|MigrationLogger|CREATE TABLE "NamingConfig_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Separator" TEXT NOT NULL, "NumberStyle" INTEGER NOT NULL, "IncludeSeriesTitle" INTEGER NOT NULL, "MultiEpisodeStyle" INTEGER NOT NULL, "IncludeEpisodeTitle" INTEGER NOT NULL, "IncludeQuality" INTEGER NOT NULL, "ReplaceSpaces" INTEGER NOT NULL, "SeasonFolderFormat" TEXT NOT NULL, "RenameEpisodes" INTEGER)
+15-2-3 20:39:57.5|Debug|MigrationLogger|INSERT INTO "NamingConfig_temp" SELECT "Id", "Separator", "NumberStyle", "IncludeSeriesTitle", "MultiEpisodeStyle", "IncludeEpisodeTitle", "IncludeQuality", "ReplaceSpaces", "SeasonFolderFormat", "RenameEpisodes" FROM "NamingConfig"
+15-2-3 20:39:57.5|Debug|MigrationLogger|DROP TABLE "NamingConfig"
+15-2-3 20:39:57.5|Debug|MigrationLogger|ALTER TABLE "NamingConfig_temp" RENAME TO "NamingConfig"
+15-2-3 20:39:57.5|Debug|MigrationLogger|Took: 00:00:00.0170130
+15-2-3 20:39:57.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (8, '2015-02-04T02:39:57', 'remove_backlog')
+15-2-3 20:39:57.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.6|Debug|MigrationLogger|8: remove_backlog migrated
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0325920
+15-2-3 20:39:57.6|Info|MigrationLogger|*** 9: fix_rename_episodes migrating ***
+15-2-3 20:39:57.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.6|Info|fix_rename_episodes|Starting migration  to 9
+15-2-3 20:39:57.6|Debug|MigrationLogger|DeleteColumn NamingConfig SeasonFolderFormat
+15-2-3 20:39:57.6|Debug|MigrationLogger|CREATE TABLE "NamingConfig_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Separator" TEXT NOT NULL, "NumberStyle" INTEGER NOT NULL, "IncludeSeriesTitle" INTEGER NOT NULL, "MultiEpisodeStyle" INTEGER NOT NULL, "IncludeEpisodeTitle" INTEGER NOT NULL, "IncludeQuality" INTEGER NOT NULL, "ReplaceSpaces" INTEGER NOT NULL, "RenameEpisodes" INTEGER)
+15-2-3 20:39:57.6|Debug|MigrationLogger|INSERT INTO "NamingConfig_temp" SELECT "Id", "Separator", "NumberStyle", "IncludeSeriesTitle", "MultiEpisodeStyle", "IncludeEpisodeTitle", "IncludeQuality", "ReplaceSpaces", "RenameEpisodes" FROM "NamingConfig"
+15-2-3 20:39:57.6|Debug|MigrationLogger|DROP TABLE "NamingConfig"
+15-2-3 20:39:57.6|Debug|MigrationLogger|ALTER TABLE "NamingConfig_temp" RENAME TO "NamingConfig"
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0124100
+15-2-3 20:39:57.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE NamingConfig SET RenameEpisodes = 1 WHERE RenameEpisodes = -1
+15-2-3 20:39:57.6|Debug|MigrationLogger|UPDATE NamingConfig SET RenameEpisodes = 1 WHERE RenameEpisodes = -1
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0003370
+15-2-3 20:39:57.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE NamingConfig SET RenameEpisodes = 0 WHERE RenameEpisodes = -2
+15-2-3 20:39:57.6|Debug|MigrationLogger|UPDATE NamingConfig SET RenameEpisodes = 0 WHERE RenameEpisodes = -2
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0003530
+15-2-3 20:39:57.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (9, '2015-02-04T02:39:57', 'fix_rename_episodes')
+15-2-3 20:39:57.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.6|Debug|MigrationLogger|9: fix_rename_episodes migrated
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0092000
+15-2-3 20:39:57.6|Info|MigrationLogger|*** 10: add_monitored migrating ***
+15-2-3 20:39:57.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.6|Info|add_monitored|Starting migration  to 10
+15-2-3 20:39:57.6|Debug|MigrationLogger|AlterTable Episodes
+15-2-3 20:39:57.6|Debug|MigrationLogger|
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0001740
+15-2-3 20:39:57.6|Debug|MigrationLogger|CreateColumn Episodes Monitored Boolean
+15-2-3 20:39:57.6|Debug|MigrationLogger|ALTER TABLE "Episodes" ADD COLUMN "Monitored" INTEGER
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0004970
+15-2-3 20:39:57.6|Debug|MigrationLogger|AlterTable Seasons
+15-2-3 20:39:57.6|Debug|MigrationLogger|
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0001680
+15-2-3 20:39:57.6|Debug|MigrationLogger|CreateColumn Seasons Monitored Boolean
+15-2-3 20:39:57.6|Debug|MigrationLogger|ALTER TABLE "Seasons" ADD COLUMN "Monitored" INTEGER
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0004500
+15-2-3 20:39:57.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Episodes SET Monitored = 1 WHERE Ignored = 0
+15-2-3 20:39:57.6|Debug|MigrationLogger|UPDATE Episodes SET Monitored = 1 WHERE Ignored = 0
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0003100
+15-2-3 20:39:57.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Episodes SET Monitored = 0 WHERE Ignored = 1
+15-2-3 20:39:57.6|Debug|MigrationLogger|UPDATE Episodes SET Monitored = 0 WHERE Ignored = 1
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0003070
+15-2-3 20:39:57.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Seasons SET Monitored = 1 WHERE Ignored = 0
+15-2-3 20:39:57.6|Debug|MigrationLogger|UPDATE Seasons SET Monitored = 1 WHERE Ignored = 0
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0003020
+15-2-3 20:39:57.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Seasons SET Monitored = 0 WHERE Ignored = 1
+15-2-3 20:39:57.6|Debug|MigrationLogger|UPDATE Seasons SET Monitored = 0 WHERE Ignored = 1
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0003030
+15-2-3 20:39:57.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (10, '2015-02-04T02:39:57', 'add_monitored')
+15-2-3 20:39:57.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.6|Debug|MigrationLogger|10: add_monitored migrated
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0240780
+15-2-3 20:39:57.6|Info|MigrationLogger|*** 11: remove_ignored migrating ***
+15-2-3 20:39:57.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.6|Info|remove_ignored|Starting migration  to 11
+15-2-3 20:39:57.6|Debug|MigrationLogger|DeleteColumn Seasons Ignored
+15-2-3 20:39:57.6|Debug|MigrationLogger|CREATE TABLE "Seasons_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL, "Monitored" INTEGER)
+15-2-3 20:39:57.6|Debug|MigrationLogger|INSERT INTO "Seasons_temp" SELECT "Id", "SeriesId", "SeasonNumber", "Monitored" FROM "Seasons"
+15-2-3 20:39:57.6|Debug|MigrationLogger|DROP TABLE "Seasons"
+15-2-3 20:39:57.6|Debug|MigrationLogger|ALTER TABLE "Seasons_temp" RENAME TO "Seasons"
+15-2-3 20:39:57.6|Debug|MigrationLogger|Took: 00:00:00.0160070
+15-2-3 20:39:57.6|Debug|MigrationLogger|DeleteColumn Episodes Ignored
+15-2-3 20:39:57.7|Debug|MigrationLogger|CREATE TABLE "Episodes_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvDbEpisodeId" INTEGER NOT NULL, "SeriesId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL, "EpisodeNumber" INTEGER NOT NULL, "Title" TEXT, "Overview" TEXT, "EpisodeFileId" INTEGER, "AirDate" DATETIME, "AbsoluteEpisodeNumber" INTEGER, "SceneAbsoluteEpisodeNumber" INTEGER, "SceneSeasonNumber" INTEGER, "SceneEpisodeNumber" INTEGER, "Monitored" INTEGER)
+15-2-3 20:39:57.7|Debug|MigrationLogger|INSERT INTO "Episodes_temp" SELECT "Id", "TvDbEpisodeId", "SeriesId", "SeasonNumber", "EpisodeNumber", "Title", "Overview", "EpisodeFileId", "AirDate", "AbsoluteEpisodeNumber", "SceneAbsoluteEpisodeNumber", "SceneSeasonNumber", "SceneEpisodeNumber", "Monitored" FROM "Episodes"
+15-2-3 20:39:57.7|Debug|MigrationLogger|DROP TABLE "Episodes"
+15-2-3 20:39:57.7|Debug|MigrationLogger|ALTER TABLE "Episodes_temp" RENAME TO "Episodes"
+15-2-3 20:39:57.7|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Episodes_TvDbEpisodeId" ON "Episodes" ("TvDbEpisodeId" ASC)
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0190330
+15-2-3 20:39:57.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (11, '2015-02-04T02:39:57', 'remove_ignored')
+15-2-3 20:39:57.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.7|Debug|MigrationLogger|11: remove_ignored migrated
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0310160
+15-2-3 20:39:57.7|Info|MigrationLogger|*** 12: remove_custom_start_date migrating ***
+15-2-3 20:39:57.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.7|Info|remove_custom_start_date|Starting migration  to 12
+15-2-3 20:39:57.7|Debug|MigrationLogger|DeleteColumn Series CustomStartDate
+15-2-3 20:39:57.7|Debug|MigrationLogger|CREATE TABLE "Series_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvdbId" INTEGER NOT NULL, "TvRageId" INTEGER NOT NULL, "ImdbId" TEXT NOT NULL, "Title" TEXT NOT NULL, "TitleSlug" TEXT NOT NULL, "CleanTitle" TEXT NOT NULL, "Status" INTEGER NOT NULL, "Overview" TEXT, "AirTime" TEXT, "Images" TEXT NOT NULL, "Path" TEXT NOT NULL, "Monitored" INTEGER NOT NULL, "QualityProfileId" INTEGER NOT NULL, "SeasonFolder" INTEGER NOT NULL, "LastInfoSync" DATETIME, "LastDiskSync" DATETIME, "Runtime" INTEGER NOT NULL, "SeriesType" INTEGER NOT NULL, "Network" TEXT, "UseSceneNumbering" INTEGER NOT NULL, "FirstAired" DATETIME, "NextAiring" DATETIME)
+15-2-3 20:39:57.7|Debug|MigrationLogger|INSERT INTO "Series_temp" SELECT "Id", "TvdbId", "TvRageId", "ImdbId", "Title", "TitleSlug", "CleanTitle", "Status", "Overview", "AirTime", "Images", "Path", "Monitored", "QualityProfileId", "SeasonFolder", "LastInfoSync", "LastDiskSync", "Runtime", "SeriesType", "Network", "UseSceneNumbering", "FirstAired", "NextAiring" FROM "Series"
+15-2-3 20:39:57.7|Debug|MigrationLogger|DROP TABLE "Series"
+15-2-3 20:39:57.7|Debug|MigrationLogger|ALTER TABLE "Series_temp" RENAME TO "Series"
+15-2-3 20:39:57.7|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvdbId" ON "Series" ("TvdbId" ASC)
+15-2-3 20:39:57.7|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TitleSlug" ON "Series" ("TitleSlug" ASC)
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0146260
+15-2-3 20:39:57.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (12, '2015-02-04T02:39:57', 'remove_custom_start_date')
+15-2-3 20:39:57.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.7|Debug|MigrationLogger|12: remove_custom_start_date migrated
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0295480
+15-2-3 20:39:57.7|Info|MigrationLogger|*** 13: add_air_date_utc migrating ***
+15-2-3 20:39:57.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.7|Info|add_air_date_utc|Starting migration  to 13
+15-2-3 20:39:57.7|Debug|MigrationLogger|AlterTable Episodes
+15-2-3 20:39:57.7|Debug|MigrationLogger|
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0001820
+15-2-3 20:39:57.7|Debug|MigrationLogger|CreateColumn Episodes AirDateUtc DateTime
+15-2-3 20:39:57.7|Debug|MigrationLogger|ALTER TABLE "Episodes" ADD COLUMN "AirDateUtc" DATETIME
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0005020
+15-2-3 20:39:57.7|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Episodes SET AirDateUtc = AirDate
+15-2-3 20:39:57.7|Debug|MigrationLogger|UPDATE Episodes SET AirDateUtc = AirDate
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0002990
+15-2-3 20:39:57.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (13, '2015-02-04T02:39:57', 'add_air_date_utc')
+15-2-3 20:39:57.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.7|Debug|MigrationLogger|13: add_air_date_utc migrated
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0096470
+15-2-3 20:39:57.7|Info|MigrationLogger|*** 14: drop_air_date migrating ***
+15-2-3 20:39:57.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.7|Info|drop_air_date|Starting migration  to 14
+15-2-3 20:39:57.7|Debug|MigrationLogger|DeleteColumn Episodes AirDate
+15-2-3 20:39:57.7|Debug|MigrationLogger|CREATE TABLE "Episodes_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvDbEpisodeId" INTEGER NOT NULL, "SeriesId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL, "EpisodeNumber" INTEGER NOT NULL, "Title" TEXT, "Overview" TEXT, "EpisodeFileId" INTEGER, "AbsoluteEpisodeNumber" INTEGER, "SceneAbsoluteEpisodeNumber" INTEGER, "SceneSeasonNumber" INTEGER, "SceneEpisodeNumber" INTEGER, "Monitored" INTEGER, "AirDateUtc" DATETIME)
+15-2-3 20:39:57.7|Debug|MigrationLogger|INSERT INTO "Episodes_temp" SELECT "Id", "TvDbEpisodeId", "SeriesId", "SeasonNumber", "EpisodeNumber", "Title", "Overview", "EpisodeFileId", "AbsoluteEpisodeNumber", "SceneAbsoluteEpisodeNumber", "SceneSeasonNumber", "SceneEpisodeNumber", "Monitored", "AirDateUtc" FROM "Episodes"
+15-2-3 20:39:57.7|Debug|MigrationLogger|DROP TABLE "Episodes"
+15-2-3 20:39:57.7|Debug|MigrationLogger|ALTER TABLE "Episodes_temp" RENAME TO "Episodes"
+15-2-3 20:39:57.7|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Episodes_TvDbEpisodeId" ON "Episodes" ("TvDbEpisodeId" ASC)
+15-2-3 20:39:57.7|Debug|MigrationLogger|Took: 00:00:00.0171040
+15-2-3 20:39:57.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (14, '2015-02-04T02:39:57', 'drop_air_date')
+15-2-3 20:39:57.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.8|Debug|MigrationLogger|14: drop_air_date migrated
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0303340
+15-2-3 20:39:57.8|Info|MigrationLogger|*** 15: add_air_date_as_string migrating ***
+15-2-3 20:39:57.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.8|Info|add_air_date_as_string|Starting migration  to 15
+15-2-3 20:39:57.8|Debug|MigrationLogger|AlterTable Episodes
+15-2-3 20:39:57.8|Debug|MigrationLogger|
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0001710
+15-2-3 20:39:57.8|Debug|MigrationLogger|CreateColumn Episodes AirDate String
+15-2-3 20:39:57.8|Debug|MigrationLogger|ALTER TABLE "Episodes" ADD COLUMN "AirDate" TEXT
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0004830
+15-2-3 20:39:57.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (15, '2015-02-04T02:39:57', 'add_air_date_as_string')
+15-2-3 20:39:57.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.8|Debug|MigrationLogger|15: add_air_date_as_string migrated
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0092070
+15-2-3 20:39:57.8|Info|MigrationLogger|*** 16: updated_imported_history_item migrating ***
+15-2-3 20:39:57.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.8|Info|updated_imported_history_item|Starting migration  to 16
+15-2-3 20:39:57.8|Debug|MigrationLogger|ExecuteSqlStatement UPDATE HISTORY SET Data = replace( Data, '"Path"', '"ImportedPath"' ) WHERE EventType=3
+15-2-3 20:39:57.8|Debug|MigrationLogger|UPDATE HISTORY SET Data = replace( Data, '"Path"', '"ImportedPath"' ) WHERE EventType=3
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0004180
+15-2-3 20:39:57.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (16, '2015-02-04T02:39:57', 'updated_imported_history_item')
+15-2-3 20:39:57.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.8|Debug|MigrationLogger|16: updated_imported_history_item migrated
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0103050
+15-2-3 20:39:57.8|Info|MigrationLogger|*** 17: reset_scene_names migrating ***
+15-2-3 20:39:57.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.8|Info|reset_scene_names|Starting migration  to 17
+15-2-3 20:39:57.8|Debug|MigrationLogger|ExecuteSqlStatement UPDATE EpisodeFiles SET SceneName = NULL where SceneName != NULL
+15-2-3 20:39:57.8|Debug|MigrationLogger|UPDATE EpisodeFiles SET SceneName = NULL where SceneName != NULL
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0003350
+15-2-3 20:39:57.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (17, '2015-02-04T02:39:57', 'reset_scene_names')
+15-2-3 20:39:57.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.8|Debug|MigrationLogger|17: reset_scene_names migrated
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0120810
+15-2-3 20:39:57.8|Info|MigrationLogger|*** 18: remove_duplicates migrating ***
+15-2-3 20:39:57.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.8|Info|remove_duplicates|Starting migration  to 18
+15-2-3 20:39:57.8|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:57.8|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0095580
+15-2-3 20:39:57.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (18, '2015-02-04T02:39:57', 'remove_duplicates')
+15-2-3 20:39:57.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.8|Debug|MigrationLogger|18: remove_duplicates migrated
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0228770
+15-2-3 20:39:57.8|Info|MigrationLogger|*** 19: restore_unique_constraints migrating ***
+15-2-3 20:39:57.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.8|Info|restore_unique_constraints|Starting migration  to 19
+15-2-3 20:39:57.8|Debug|MigrationLogger|ExecuteSqlStatement DROP INDEX IF EXISTS "IX_Series_TvdbId"
+15-2-3 20:39:57.8|Debug|MigrationLogger|DROP INDEX IF EXISTS "IX_Series_TvdbId"
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0006170
+15-2-3 20:39:57.8|Debug|MigrationLogger|ExecuteSqlStatement DROP INDEX IF EXISTS "IX_Series_TitleSlug"
+15-2-3 20:39:57.8|Debug|MigrationLogger|DROP INDEX IF EXISTS "IX_Series_TitleSlug"
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0004510
+15-2-3 20:39:57.8|Debug|MigrationLogger|ExecuteSqlStatement DROP INDEX IF EXISTS "IX_Episodes_TvDbEpisodeId"
+15-2-3 20:39:57.8|Debug|MigrationLogger|DROP INDEX IF EXISTS "IX_Episodes_TvDbEpisodeId"
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0004490
+15-2-3 20:39:57.8|Debug|MigrationLogger|CreateIndex Series (TvdbId)
+15-2-3 20:39:57.8|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvdbId" ON "Series" ("TvdbId" ASC)
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0005440
+15-2-3 20:39:57.8|Debug|MigrationLogger|CreateIndex Series (TitleSlug)
+15-2-3 20:39:57.8|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TitleSlug" ON "Series" ("TitleSlug" ASC)
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0005510
+15-2-3 20:39:57.8|Debug|MigrationLogger|CreateIndex Episodes (TvDbEpisodeId)
+15-2-3 20:39:57.8|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Episodes_TvDbEpisodeId" ON "Episodes" ("TvDbEpisodeId" ASC)
+15-2-3 20:39:57.8|Debug|MigrationLogger|Took: 00:00:00.0005750
+15-2-3 20:39:57.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (19, '2015-02-04T02:39:57', 'restore_unique_constraints')
+15-2-3 20:39:57.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.9|Debug|MigrationLogger|19: restore_unique_constraints migrated
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0112080
+15-2-3 20:39:57.9|Info|MigrationLogger|*** 20: add_year_and_seasons_to_series migrating ***
+15-2-3 20:39:57.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.9|Info|add_year_and_seasons_to_series|Starting migration  to 20
+15-2-3 20:39:57.9|Debug|MigrationLogger|AlterTable Series
+15-2-3 20:39:57.9|Debug|MigrationLogger|
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0001710
+15-2-3 20:39:57.9|Debug|MigrationLogger|CreateColumn Series Year Int32
+15-2-3 20:39:57.9|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Year" INTEGER
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0008140
+15-2-3 20:39:57.9|Debug|MigrationLogger|AlterTable Series
+15-2-3 20:39:57.9|Debug|MigrationLogger|
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0001700
+15-2-3 20:39:57.9|Debug|MigrationLogger|CreateColumn Series Seasons String
+15-2-3 20:39:57.9|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Seasons" TEXT
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0005050
+15-2-3 20:39:57.9|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:57.9|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0007480
+15-2-3 20:39:57.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (20, '2015-02-04T02:39:57', 'add_year_and_seasons_to_series')
+15-2-3 20:39:57.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.9|Debug|MigrationLogger|20: add_year_and_seasons_to_series migrated
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0150710
+15-2-3 20:39:57.9|Info|MigrationLogger|*** 21: drop_seasons_table migrating ***
+15-2-3 20:39:57.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.9|Info|drop_seasons_table|Starting migration  to 21
+15-2-3 20:39:57.9|Debug|MigrationLogger|DeleteTable Seasons
+15-2-3 20:39:57.9|Debug|MigrationLogger|DROP TABLE "Seasons"
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0006270
+15-2-3 20:39:57.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (21, '2015-02-04T02:39:57', 'drop_seasons_table')
+15-2-3 20:39:57.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.9|Debug|MigrationLogger|21: drop_seasons_table migrated
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0151350
+15-2-3 20:39:57.9|Info|MigrationLogger|*** 22: move_indexer_to_generic_provider migrating ***
+15-2-3 20:39:57.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.9|Info|move_indexer_to_generic_provider|Starting migration  to 22
+15-2-3 20:39:57.9|Debug|MigrationLogger|AlterTable Indexers
+15-2-3 20:39:57.9|Debug|MigrationLogger|
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0001700
+15-2-3 20:39:57.9|Debug|MigrationLogger|CreateColumn Indexers ConfigContract String
+15-2-3 20:39:57.9|Debug|MigrationLogger|ALTER TABLE "Indexers" ADD COLUMN "ConfigContract" TEXT
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0004910
+15-2-3 20:39:57.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (22, '2015-02-04T02:39:57', 'move_indexer_to_generic_provider')
+15-2-3 20:39:57.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.9|Debug|MigrationLogger|22: move_indexer_to_generic_provider migrated
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0131400
+15-2-3 20:39:57.9|Info|MigrationLogger|*** 23: add_config_contract_to_indexers migrating ***
+15-2-3 20:39:57.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.9|Info|add_config_contract_to_indexers|Starting migration  to 23
+15-2-3 20:39:57.9|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:57.9|Debug|MigrationLogger|UPDATE "Indexers" SET "ConfigContract" = 'NewznabSettings' WHERE "Implementation" = 'Newznab'
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0013460
+15-2-3 20:39:57.9|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:57.9|Debug|MigrationLogger|UPDATE "Indexers" SET "ConfigContract" = 'OmgwtfnzbsSettings' WHERE "Implementation" = 'Omgwtfnzbs'
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0004710
+15-2-3 20:39:57.9|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:57.9|Debug|MigrationLogger|UPDATE "Indexers" SET "ConfigContract" = 'NullConfig' WHERE "Implementation" = 'Wombles'
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0004310
+15-2-3 20:39:57.9|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:57.9|Debug|MigrationLogger|UPDATE "Indexers" SET "ConfigContract" = 'NullConfig' WHERE "Implementation" = 'Eztv'
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0004410
+15-2-3 20:39:57.9|Debug|MigrationLogger|FluentMigrator.Expressions.DeleteDataExpression
+15-2-3 20:39:57.9|Debug|MigrationLogger|DELETE FROM "Indexers" WHERE "ConfigContract" IS NULL
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0012460
+15-2-3 20:39:57.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (23, '2015-02-04T02:39:57', 'add_config_contract_to_indexers')
+15-2-3 20:39:57.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:57.9|Debug|MigrationLogger|23: add_config_contract_to_indexers migrated
+15-2-3 20:39:57.9|Debug|MigrationLogger|Took: 00:00:00.0078840
+15-2-3 20:39:57.9|Info|MigrationLogger|*** 24: drop_tvdb_episodeid migrating ***
+15-2-3 20:39:57.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:57.9|Info|drop_tvdb_episodeid|Starting migration  to 24
+15-2-3 20:39:57.9|Debug|MigrationLogger|DeleteColumn Episodes TvDbEpisodeId
+15-2-3 20:39:57.9|Debug|MigrationLogger|CREATE TABLE "Episodes_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "SeasonNumber" INTEGER NOT NULL, "EpisodeNumber" INTEGER NOT NULL, "Title" TEXT, "Overview" TEXT, "EpisodeFileId" INTEGER, "AbsoluteEpisodeNumber" INTEGER, "SceneAbsoluteEpisodeNumber" INTEGER, "SceneSeasonNumber" INTEGER, "SceneEpisodeNumber" INTEGER, "Monitored" INTEGER, "AirDateUtc" DATETIME, "AirDate" TEXT)
+15-2-3 20:39:57.9|Debug|MigrationLogger|INSERT INTO "Episodes_temp" SELECT "Id", "SeriesId", "SeasonNumber", "EpisodeNumber", "Title", "Overview", "EpisodeFileId", "AbsoluteEpisodeNumber", "SceneAbsoluteEpisodeNumber", "SceneSeasonNumber", "SceneEpisodeNumber", "Monitored", "AirDateUtc", "AirDate" FROM "Episodes"
+15-2-3 20:39:58.0|Debug|MigrationLogger|DROP TABLE "Episodes"
+15-2-3 20:39:58.0|Debug|MigrationLogger|ALTER TABLE "Episodes_temp" RENAME TO "Episodes"
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0123870
+15-2-3 20:39:58.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (24, '2015-02-04T02:39:58', 'drop_tvdb_episodeid')
+15-2-3 20:39:58.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.0|Debug|MigrationLogger|24: drop_tvdb_episodeid migrated
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0235240
+15-2-3 20:39:58.0|Info|MigrationLogger|*** 25: move_notification_to_generic_provider migrating ***
+15-2-3 20:39:58.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.0|Info|move_notification_to_generic_provider|Starting migration  to 25
+15-2-3 20:39:58.0|Debug|MigrationLogger|AlterTable Notifications
+15-2-3 20:39:58.0|Debug|MigrationLogger|
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0001730
+15-2-3 20:39:58.0|Debug|MigrationLogger|CreateColumn Notifications ConfigContract String
+15-2-3 20:39:58.0|Debug|MigrationLogger|ALTER TABLE "Notifications" ADD COLUMN "ConfigContract" TEXT
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004890
+15-2-3 20:39:58.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (25, '2015-02-04T02:39:58', 'move_notification_to_generic_provider')
+15-2-3 20:39:58.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.0|Debug|MigrationLogger|25: move_notification_to_generic_provider migrated
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0153800
+15-2-3 20:39:58.0|Info|MigrationLogger|*** 26: add_config_contract_to_notifications migrating ***
+15-2-3 20:39:58.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.0|Info|add_config_contract_to_notifications|Starting migration  to 26
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'EmailSettings' WHERE "Implementation" = 'Email'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004540
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'GrowlSettings' WHERE "Implementation" = 'Growl'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004640
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'NotifyMyAndroidSettings' WHERE "Implementation" = 'NotifyMyAndroid'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004870
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'PlexClientSettings' WHERE "Implementation" = 'PlexClient'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004720
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'PlexServerSettings' WHERE "Implementation" = 'PlexServer'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004570
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'ProwlSettings' WHERE "Implementation" = 'Prowl'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004660
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'PushBulletSettings' WHERE "Implementation" = 'PushBullet'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004630
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'PushoverSettings' WHERE "Implementation" = 'Pushover'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004640
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Notifications" SET "ConfigContract" = 'XbmcSettings' WHERE "Implementation" = 'Xbmc'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004300
+15-2-3 20:39:58.0|Debug|MigrationLogger|FluentMigrator.Expressions.DeleteDataExpression
+15-2-3 20:39:58.0|Debug|MigrationLogger|DELETE FROM "Notifications" WHERE "ConfigContract" IS NULL
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0003570
+15-2-3 20:39:58.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (26, '2015-02-04T02:39:58', 'add_config_contract_to_notifications')
+15-2-3 20:39:58.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.0|Debug|MigrationLogger|26: add_config_contract_to_notifications migrated
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0144600
+15-2-3 20:39:58.0|Info|MigrationLogger|*** 27: fix_omgwtfnzbs migrating ***
+15-2-3 20:39:58.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.0|Info|fix_omgwtfnzbs|Starting migration  to 27
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Indexers" SET "ConfigContract" = 'OmgwtfnzbsSettings' WHERE "Implementation" = 'Omgwtfnzbs'
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004720
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Indexers" SET "Settings" = '{}' WHERE "Implementation" = 'Omgwtfnzbs' AND "Settings" IS NULL
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004700
+15-2-3 20:39:58.0|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:58.0|Debug|MigrationLogger|UPDATE "Indexers" SET "Settings" = '{}' WHERE "Implementation" = 'Omgwtfnzbs' AND "Settings" = ''
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0004430
+15-2-3 20:39:58.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (27, '2015-02-04T02:39:58', 'fix_omgwtfnzbs')
+15-2-3 20:39:58.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.0|Debug|MigrationLogger|27: fix_omgwtfnzbs migrated
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0096760
+15-2-3 20:39:58.0|Info|MigrationLogger|*** 28: add_blacklist_table migrating ***
+15-2-3 20:39:58.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.0|Info|add_blacklist_table|Starting migration  to 28
+15-2-3 20:39:58.0|Debug|MigrationLogger|CreateTable Blacklist
+15-2-3 20:39:58.0|Debug|MigrationLogger|CREATE TABLE "Blacklist" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "EpisodeIds" TEXT NOT NULL, "SourceTitle" TEXT NOT NULL, "Quality" TEXT NOT NULL, "Date" DATETIME NOT NULL)
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0008520
+15-2-3 20:39:58.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (28, '2015-02-04T02:39:58', 'add_blacklist_table')
+15-2-3 20:39:58.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.0|Debug|MigrationLogger|28: add_blacklist_table migrated
+15-2-3 20:39:58.0|Debug|MigrationLogger|Took: 00:00:00.0119730
+15-2-3 20:39:58.1|Info|MigrationLogger|*** 29: add_formats_to_naming_config migrating ***
+15-2-3 20:39:58.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.1|Info|add_formats_to_naming_config|Starting migration  to 29
+15-2-3 20:39:58.1|Debug|MigrationLogger|AlterTable NamingConfig
+15-2-3 20:39:58.1|Debug|MigrationLogger|
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0001990
+15-2-3 20:39:58.1|Debug|MigrationLogger|CreateColumn NamingConfig StandardEpisodeFormat String
+15-2-3 20:39:58.1|Debug|MigrationLogger|ALTER TABLE "NamingConfig" ADD COLUMN "StandardEpisodeFormat" TEXT
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0005150
+15-2-3 20:39:58.1|Debug|MigrationLogger|AlterTable NamingConfig
+15-2-3 20:39:58.1|Debug|MigrationLogger|
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0001700
+15-2-3 20:39:58.1|Debug|MigrationLogger|CreateColumn NamingConfig DailyEpisodeFormat String
+15-2-3 20:39:58.1|Debug|MigrationLogger|ALTER TABLE "NamingConfig" ADD COLUMN "DailyEpisodeFormat" TEXT
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0004900
+15-2-3 20:39:58.1|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.1|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0033440
+15-2-3 20:39:58.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (29, '2015-02-04T02:39:58', 'add_formats_to_naming_config')
+15-2-3 20:39:58.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.1|Debug|MigrationLogger|29: add_formats_to_naming_config migrated
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0119980
+15-2-3 20:39:58.1|Info|MigrationLogger|*** 30: add_season_folder_format_to_naming_config migrating ***
+15-2-3 20:39:58.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.1|Info|add_season_folder_format_to_naming_config|Starting migration  to 30
+15-2-3 20:39:58.1|Debug|MigrationLogger|AlterTable NamingConfig
+15-2-3 20:39:58.1|Debug|MigrationLogger|
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0001730
+15-2-3 20:39:58.1|Debug|MigrationLogger|CreateColumn NamingConfig SeasonFolderFormat String
+15-2-3 20:39:58.1|Debug|MigrationLogger|ALTER TABLE "NamingConfig" ADD COLUMN "SeasonFolderFormat" TEXT
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0005060
+15-2-3 20:39:58.1|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.1|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0005750
+15-2-3 20:39:58.1|Debug|MigrationLogger|ExecuteSqlStatement DELETE FROM Config WHERE [Key] = 'seasonfolderformat'
+15-2-3 20:39:58.1|Debug|MigrationLogger|DELETE FROM Config WHERE [Key] = 'seasonfolderformat'
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0003090
+15-2-3 20:39:58.1|Debug|MigrationLogger|ExecuteSqlStatement DELETE FROM Config WHERE [Key] = 'useseasonfolder'
+15-2-3 20:39:58.1|Debug|MigrationLogger|DELETE FROM Config WHERE [Key] = 'useseasonfolder'
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0003130
+15-2-3 20:39:58.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (30, '2015-02-04T02:39:58', 'add_season_folder_format_to_naming_config')
+15-2-3 20:39:58.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.1|Debug|MigrationLogger|30: add_season_folder_format_to_naming_config migrated
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0095570
+15-2-3 20:39:58.1|Info|MigrationLogger|*** 31: delete_old_naming_config_columns migrating ***
+15-2-3 20:39:58.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.1|Info|delete_old_naming_config_columns|Starting migration  to 31
+15-2-3 20:39:58.1|Debug|MigrationLogger|DeleteColumn NamingConfig Separator, NumberStyle, IncludeSeriesTitle, IncludeEpisodeTitle, IncludeQuality, ReplaceSpaces
+15-2-3 20:39:58.1|Debug|MigrationLogger|CREATE TABLE "NamingConfig_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "MultiEpisodeStyle" INTEGER NOT NULL, "RenameEpisodes" INTEGER, "StandardEpisodeFormat" TEXT, "DailyEpisodeFormat" TEXT, "SeasonFolderFormat" TEXT)
+15-2-3 20:39:58.1|Debug|MigrationLogger|INSERT INTO "NamingConfig_temp" SELECT "Id", "MultiEpisodeStyle", "RenameEpisodes", "StandardEpisodeFormat", "DailyEpisodeFormat", "SeasonFolderFormat" FROM "NamingConfig"
+15-2-3 20:39:58.1|Debug|MigrationLogger|DROP TABLE "NamingConfig"
+15-2-3 20:39:58.1|Debug|MigrationLogger|ALTER TABLE "NamingConfig_temp" RENAME TO "NamingConfig"
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0123080
+15-2-3 20:39:58.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (31, '2015-02-04T02:39:58', 'delete_old_naming_config_columns')
+15-2-3 20:39:58.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.1|Debug|MigrationLogger|31: delete_old_naming_config_columns migrated
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0174770
+15-2-3 20:39:58.1|Info|MigrationLogger|*** 32: set_default_release_group migrating ***
+15-2-3 20:39:58.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.1|Info|set_default_release_group|Starting migration  to 32
+15-2-3 20:39:58.1|Debug|MigrationLogger|ExecuteSqlStatement UPDATE EpisodeFiles SET ReleaseGroup = 'DRONE' WHERE ReleaseGroup IS NULL
+15-2-3 20:39:58.1|Debug|MigrationLogger|UPDATE EpisodeFiles SET ReleaseGroup = 'DRONE' WHERE ReleaseGroup IS NULL
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0003660
+15-2-3 20:39:58.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (32, '2015-02-04T02:39:58', 'set_default_release_group')
+15-2-3 20:39:58.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.1|Debug|MigrationLogger|32: set_default_release_group migrated
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0091620
+15-2-3 20:39:58.1|Info|MigrationLogger|*** 33: add_api_key_to_pushover migrating ***
+15-2-3 20:39:58.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.1|Info|add_api_key_to_pushover|Starting migration  to 33
+15-2-3 20:39:58.1|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.1|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0006140
+15-2-3 20:39:58.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (33, '2015-02-04T02:39:58', 'add_api_key_to_pushover')
+15-2-3 20:39:58.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.1|Debug|MigrationLogger|33: add_api_key_to_pushover migrated
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0148460
+15-2-3 20:39:58.1|Info|MigrationLogger|*** 34: remove_series_contraints migrating ***
+15-2-3 20:39:58.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.1|Info|remove_series_contraints|Starting migration  to 34
+15-2-3 20:39:58.1|Debug|MigrationLogger|AlterTable Series
+15-2-3 20:39:58.1|Debug|MigrationLogger|
+15-2-3 20:39:58.1|Debug|MigrationLogger|Took: 00:00:00.0001890
+15-2-3 20:39:58.1|Debug|MigrationLogger|AlterColumn Series ImdbId String
+15-2-3 20:39:58.2|Debug|MigrationLogger|CREATE TABLE "Series_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvdbId" INTEGER NOT NULL, "TvRageId" INTEGER NOT NULL, "ImdbId" TEXT, "Title" TEXT NOT NULL, "TitleSlug" TEXT NOT NULL, "CleanTitle" TEXT NOT NULL, "Status" INTEGER NOT NULL, "Overview" TEXT, "AirTime" TEXT, "Images" TEXT NOT NULL, "Path" TEXT NOT NULL, "Monitored" INTEGER NOT NULL, "QualityProfileId" INTEGER NOT NULL, "SeasonFolder" INTEGER NOT NULL, "LastInfoSync" DATETIME, "LastDiskSync" DATETIME, "Runtime" INTEGER NOT NULL, "SeriesType" INTEGER NOT NULL, "Network" TEXT, "UseSceneNumbering" INTEGER NOT NULL, "FirstAired" DATETIME, "NextAiring" DATETIME, "Year" INTEGER, "Seasons" TEXT)
+15-2-3 20:39:58.2|Debug|MigrationLogger|INSERT INTO "Series_temp" SELECT "Id", "TvdbId", "TvRageId", "ImdbId", "Title", "TitleSlug", "CleanTitle", "Status", "Overview", "AirTime", "Images", "Path", "Monitored", "QualityProfileId", "SeasonFolder", "LastInfoSync", "LastDiskSync", "Runtime", "SeriesType", "Network", "UseSceneNumbering", "FirstAired", "NextAiring", "Year", "Seasons" FROM "Series"
+15-2-3 20:39:58.2|Debug|MigrationLogger|DROP TABLE "Series"
+15-2-3 20:39:58.2|Debug|MigrationLogger|ALTER TABLE "Series_temp" RENAME TO "Series"
+15-2-3 20:39:58.2|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvdbId" ON "Series" ("TvdbId" ASC)
+15-2-3 20:39:58.2|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TitleSlug" ON "Series" ("TitleSlug" ASC)
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0157600
+15-2-3 20:39:58.2|Debug|MigrationLogger|AlterColumn Series TitleSlug String
+15-2-3 20:39:58.2|Debug|MigrationLogger|CREATE TABLE "Series_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvdbId" INTEGER NOT NULL, "TvRageId" INTEGER NOT NULL, "ImdbId" TEXT, "Title" TEXT NOT NULL, "TitleSlug" TEXT, "CleanTitle" TEXT NOT NULL, "Status" INTEGER NOT NULL, "Overview" TEXT, "AirTime" TEXT, "Images" TEXT NOT NULL, "Path" TEXT NOT NULL, "Monitored" INTEGER NOT NULL, "QualityProfileId" INTEGER NOT NULL, "SeasonFolder" INTEGER NOT NULL, "LastInfoSync" DATETIME, "LastDiskSync" DATETIME, "Runtime" INTEGER NOT NULL, "SeriesType" INTEGER NOT NULL, "Network" TEXT, "UseSceneNumbering" INTEGER NOT NULL, "FirstAired" DATETIME, "NextAiring" DATETIME, "Year" INTEGER, "Seasons" TEXT)
+15-2-3 20:39:58.2|Debug|MigrationLogger|INSERT INTO "Series_temp" SELECT "Id", "TvdbId", "TvRageId", "ImdbId", "Title", "TitleSlug", "CleanTitle", "Status", "Overview", "AirTime", "Images", "Path", "Monitored", "QualityProfileId", "SeasonFolder", "LastInfoSync", "LastDiskSync", "Runtime", "SeriesType", "Network", "UseSceneNumbering", "FirstAired", "NextAiring", "Year", "Seasons" FROM "Series"
+15-2-3 20:39:58.2|Debug|MigrationLogger|DROP TABLE "Series"
+15-2-3 20:39:58.2|Debug|MigrationLogger|ALTER TABLE "Series_temp" RENAME TO "Series"
+15-2-3 20:39:58.2|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvdbId" ON "Series" ("TvdbId" ASC)
+15-2-3 20:39:58.2|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TitleSlug" ON "Series" ("TitleSlug" ASC)
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0177890
+15-2-3 20:39:58.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (34, '2015-02-04T02:39:58', 'remove_series_contraints')
+15-2-3 20:39:58.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.2|Debug|MigrationLogger|34: remove_series_contraints migrated
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0320550
+15-2-3 20:39:58.2|Info|MigrationLogger|*** 35: add_series_folder_format_to_naming_config migrating ***
+15-2-3 20:39:58.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.2|Info|add_series_folder_format_to_naming_config|Starting migration  to 35
+15-2-3 20:39:58.2|Debug|MigrationLogger|AlterTable NamingConfig
+15-2-3 20:39:58.2|Debug|MigrationLogger|
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0001720
+15-2-3 20:39:58.2|Debug|MigrationLogger|CreateColumn NamingConfig SeriesFolderFormat String
+15-2-3 20:39:58.2|Debug|MigrationLogger|ALTER TABLE "NamingConfig" ADD COLUMN "SeriesFolderFormat" TEXT
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0005020
+15-2-3 20:39:58.2|Debug|MigrationLogger|ExecuteSqlStatement UPDATE NamingConfig SET SeriesFolderFormat = '{Series Title}'
+15-2-3 20:39:58.2|Debug|MigrationLogger|UPDATE NamingConfig SET SeriesFolderFormat = '{Series Title}'
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0003320
+15-2-3 20:39:58.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (35, '2015-02-04T02:39:58', 'add_series_folder_format_to_naming_config')
+15-2-3 20:39:58.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.2|Debug|MigrationLogger|35: add_series_folder_format_to_naming_config migrated
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0123270
+15-2-3 20:39:58.2|Info|MigrationLogger|*** 36: update_with_quality_converters migrating ***
+15-2-3 20:39:58.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.2|Info|update_with_quality_converters|Starting migration  to 36
+15-2-3 20:39:58.2|Debug|MigrationLogger|AlterTable QualityProfiles
+15-2-3 20:39:58.2|Debug|MigrationLogger|
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0001740
+15-2-3 20:39:58.2|Debug|MigrationLogger|CreateColumn QualityProfiles Items String
+15-2-3 20:39:58.2|Debug|MigrationLogger|ALTER TABLE "QualityProfiles" ADD COLUMN "Items" TEXT
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0004730
+15-2-3 20:39:58.2|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.2|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0008900
+15-2-3 20:39:58.2|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.2|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0008580
+15-2-3 20:39:58.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (36, '2015-02-04T02:39:58', 'update_with_quality_converters')
+15-2-3 20:39:58.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.2|Debug|MigrationLogger|36: update_with_quality_converters migrated
+15-2-3 20:39:58.2|Debug|MigrationLogger|Took: 00:00:00.0146910
+15-2-3 20:39:58.2|Info|MigrationLogger|*** 37: add_configurable_qualities migrating ***
+15-2-3 20:39:58.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.2|Info|add_configurable_qualities|Starting migration  to 37
+15-2-3 20:39:58.2|Debug|MigrationLogger|DeleteColumn QualityProfiles Allowed
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE TABLE "QualityProfiles_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Name" TEXT NOT NULL, "Cutoff" INTEGER NOT NULL, "Items" TEXT)
+15-2-3 20:39:58.3|Debug|MigrationLogger|INSERT INTO "QualityProfiles_temp" SELECT "Id", "Name", "Cutoff", "Items" FROM "QualityProfiles"
+15-2-3 20:39:58.3|Debug|MigrationLogger|DROP TABLE "QualityProfiles"
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "QualityProfiles_temp" RENAME TO "QualityProfiles"
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityProfiles_Name" ON "QualityProfiles" ("Name" ASC)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0156520
+15-2-3 20:39:58.3|Debug|MigrationLogger|AlterColumn QualityProfiles Items String
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE TABLE "QualityProfiles_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Name" TEXT NOT NULL, "Cutoff" INTEGER NOT NULL, "Items" TEXT NOT NULL)
+15-2-3 20:39:58.3|Debug|MigrationLogger|INSERT INTO "QualityProfiles_temp" SELECT "Id", "Name", "Cutoff", "Items" FROM "QualityProfiles"
+15-2-3 20:39:58.3|Debug|MigrationLogger|DROP TABLE "QualityProfiles"
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "QualityProfiles_temp" RENAME TO "QualityProfiles"
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityProfiles_Name" ON "QualityProfiles" ("Name" ASC)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0120550
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateTable QualityDefinitions
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE TABLE "QualityDefinitions" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Quality" INTEGER NOT NULL, "Title" TEXT NOT NULL, "Weight" INTEGER NOT NULL, "MinSize" INTEGER NOT NULL, "MaxSize" INTEGER NOT NULL)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0008390
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateIndex QualityDefinitions (Quality)
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityDefinitions_Quality" ON "QualityDefinitions" ("Quality" ASC)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0005870
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateIndex QualityDefinitions (Title)
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityDefinitions_Title" ON "QualityDefinitions" ("Title" ASC)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0005890
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateIndex QualityDefinitions (Weight)
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityDefinitions_Weight" ON "QualityDefinitions" ("Weight" ASC)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0006050
+15-2-3 20:39:58.3|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.3|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0007180
+15-2-3 20:39:58.3|Debug|MigrationLogger|DeleteTable QualitySizes
+15-2-3 20:39:58.3|Debug|MigrationLogger|DROP TABLE "QualitySizes"
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0005500
+15-2-3 20:39:58.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (37, '2015-02-04T02:39:58', 'add_configurable_qualities')
+15-2-3 20:39:58.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.3|Debug|MigrationLogger|37: add_configurable_qualities migrated
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0098410
+15-2-3 20:39:58.3|Info|MigrationLogger|*** 38: add_on_upgrade_to_notifications migrating ***
+15-2-3 20:39:58.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.3|Info|add_on_upgrade_to_notifications|Starting migration  to 38
+15-2-3 20:39:58.3|Debug|MigrationLogger|AlterTable Notifications
+15-2-3 20:39:58.3|Debug|MigrationLogger|
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0001720
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateColumn Notifications OnUpgrade Boolean
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "Notifications" ADD COLUMN "OnUpgrade" INTEGER
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0005010
+15-2-3 20:39:58.3|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Notifications SET OnUpgrade = OnDownload
+15-2-3 20:39:58.3|Debug|MigrationLogger|UPDATE Notifications SET OnUpgrade = OnDownload
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0002960
+15-2-3 20:39:58.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (38, '2015-02-04T02:39:58', 'add_on_upgrade_to_notifications')
+15-2-3 20:39:58.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.3|Debug|MigrationLogger|38: add_on_upgrade_to_notifications migrated
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0132110
+15-2-3 20:39:58.3|Info|MigrationLogger|*** 39: add_metadata_tables migrating ***
+15-2-3 20:39:58.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.3|Info|add_metadata_tables|Starting migration  to 39
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateTable Metadata
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE TABLE "Metadata" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Enable" INTEGER NOT NULL, "Name" TEXT NOT NULL, "Implementation" TEXT NOT NULL, "Settings" TEXT NOT NULL, "ConfigContract" TEXT NOT NULL)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0008520
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateTable MetadataFiles
+15-2-3 20:39:58.3|Debug|MigrationLogger|CREATE TABLE "MetadataFiles" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "Consumer" TEXT NOT NULL, "Type" INTEGER NOT NULL, "RelativePath" TEXT NOT NULL, "LastUpdated" DATETIME NOT NULL, "SeasonNumber" INTEGER, "EpisodeFileId" INTEGER)
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0009780
+15-2-3 20:39:58.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (39, '2015-02-04T02:39:58', 'add_metadata_tables')
+15-2-3 20:39:58.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.3|Debug|MigrationLogger|39: add_metadata_tables migrated
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0108050
+15-2-3 20:39:58.3|Info|MigrationLogger|*** 40: add_metadata_to_episodes_and_series migrating ***
+15-2-3 20:39:58.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.3|Info|add_metadata_to_episodes_and_series|Starting migration  to 40
+15-2-3 20:39:58.3|Debug|MigrationLogger|AlterTable Series
+15-2-3 20:39:58.3|Debug|MigrationLogger|
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0001700
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateColumn Series Actors String
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Actors" TEXT
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0005130
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateColumn Series Ratings String
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Ratings" TEXT
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0004900
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateColumn Series Genres String
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Genres" TEXT
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0004990
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateColumn Series Certification String
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Certification" TEXT
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0004970
+15-2-3 20:39:58.3|Debug|MigrationLogger|AlterTable Episodes
+15-2-3 20:39:58.3|Debug|MigrationLogger|
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0001840
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateColumn Episodes Ratings String
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "Episodes" ADD COLUMN "Ratings" TEXT
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0004580
+15-2-3 20:39:58.3|Debug|MigrationLogger|CreateColumn Episodes Images String
+15-2-3 20:39:58.3|Debug|MigrationLogger|ALTER TABLE "Episodes" ADD COLUMN "Images" TEXT
+15-2-3 20:39:58.3|Debug|MigrationLogger|Took: 00:00:00.0004510
+15-2-3 20:39:58.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (40, '2015-02-04T02:39:58', 'add_metadata_to_episodes_and_series')
+15-2-3 20:39:58.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.4|Debug|MigrationLogger|40: add_metadata_to_episodes_and_series migrated
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0143460
+15-2-3 20:39:58.4|Info|MigrationLogger|*** 41: fix_xbmc_season_images_metadata migrating ***
+15-2-3 20:39:58.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.4|Info|fix_xbmc_season_images_metadata|Starting migration  to 41
+15-2-3 20:39:58.4|Debug|MigrationLogger|ExecuteSqlStatement UPDATE MetadataFiles SET Type = 4 WHERE Consumer = 'XbmcMetadata' AND SeasonNumber IS NOT NULL
+15-2-3 20:39:58.4|Debug|MigrationLogger|UPDATE MetadataFiles SET Type = 4 WHERE Consumer = 'XbmcMetadata' AND SeasonNumber IS NOT NULL
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0003880
+15-2-3 20:39:58.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (41, '2015-02-04T02:39:58', 'fix_xbmc_season_images_metadata')
+15-2-3 20:39:58.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.4|Debug|MigrationLogger|41: fix_xbmc_season_images_metadata migrated
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0039200
+15-2-3 20:39:58.4|Info|MigrationLogger|*** 42: add_download_clients_table migrating ***
+15-2-3 20:39:58.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.4|Info|add_download_clients_table|Starting migration  to 42
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateTable DownloadClients
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE TABLE "DownloadClients" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Enable" INTEGER NOT NULL, "Name" TEXT NOT NULL, "Implementation" TEXT NOT NULL, "Settings" TEXT NOT NULL, "ConfigContract" TEXT NOT NULL, "Protocol" INTEGER NOT NULL)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0009200
+15-2-3 20:39:58.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (42, '2015-02-04T02:39:58', 'add_download_clients_table')
+15-2-3 20:39:58.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.4|Debug|MigrationLogger|42: add_download_clients_table migrated
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0115160
+15-2-3 20:39:58.4|Info|MigrationLogger|*** 43: convert_config_to_download_clients migrating ***
+15-2-3 20:39:58.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.4|Info|convert_config_to_download_clients|Starting migration  to 43
+15-2-3 20:39:58.4|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.4|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0014810
+15-2-3 20:39:58.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (43, '2015-02-04T02:39:58', 'convert_config_to_download_clients')
+15-2-3 20:39:58.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.4|Debug|MigrationLogger|43: convert_config_to_download_clients migrated
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0103700
+15-2-3 20:39:58.4|Info|MigrationLogger|*** 44: fix_xbmc_episode_metadata migrating ***
+15-2-3 20:39:58.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.4|Info|fix_xbmc_episode_metadata|Starting migration  to 44
+15-2-3 20:39:58.4|Debug|MigrationLogger|ExecuteSqlStatement UPDATE MetadataFiles SET Type = 2 WHERE Consumer = 'XbmcMetadata' AND EpisodeFileId IS NOT NULL AND Type = 4 AND RelativePath LIKE '%.nfo'
+15-2-3 20:39:58.4|Debug|MigrationLogger|UPDATE MetadataFiles SET Type = 2 WHERE Consumer = 'XbmcMetadata' AND EpisodeFileId IS NOT NULL AND Type = 4 AND RelativePath LIKE '%.nfo'
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004600
+15-2-3 20:39:58.4|Debug|MigrationLogger|ExecuteSqlStatement UPDATE MetadataFiles SET Type = 5 WHERE Consumer = 'XbmcMetadata' AND EpisodeFileId IS NOT NULL AND Type = 4
+15-2-3 20:39:58.4|Debug|MigrationLogger|UPDATE MetadataFiles SET Type = 5 WHERE Consumer = 'XbmcMetadata' AND EpisodeFileId IS NOT NULL AND Type = 4
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004050
+15-2-3 20:39:58.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (44, '2015-02-04T02:39:58', 'fix_xbmc_episode_metadata')
+15-2-3 20:39:58.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.4|Debug|MigrationLogger|44: fix_xbmc_episode_metadata migrated
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0130640
+15-2-3 20:39:58.4|Info|MigrationLogger|*** 45: add_indexes migrating ***
+15-2-3 20:39:58.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.4|Info|add_indexes|Starting migration  to 45
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex Blacklist (SeriesId)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_Blacklist_SeriesId" ON "Blacklist" ("SeriesId" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004820
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex EpisodeFiles (SeriesId)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_EpisodeFiles_SeriesId" ON "EpisodeFiles" ("SeriesId" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004850
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex Episodes (EpisodeFileId)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_Episodes_EpisodeFileId" ON "Episodes" ("EpisodeFileId" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004640
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex Episodes (SeriesId)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_Episodes_SeriesId" ON "Episodes" ("SeriesId" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004660
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex History (EpisodeId)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_History_EpisodeId" ON "History" ("EpisodeId" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004410
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex History (Date)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_History_Date" ON "History" ("Date" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004280
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex Series (Path)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_Series_Path" ON "Series" ("Path" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004150
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex Series (CleanTitle)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_Series_CleanTitle" ON "Series" ("CleanTitle" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004560
+15-2-3 20:39:58.4|Debug|MigrationLogger|CreateIndex Series (TvRageId)
+15-2-3 20:39:58.4|Debug|MigrationLogger|CREATE INDEX "IX_Series_TvRageId" ON "Series" ("TvRageId" ASC)
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004300
+15-2-3 20:39:58.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (45, '2015-02-04T02:39:58', 'add_indexes')
+15-2-3 20:39:58.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.4|Debug|MigrationLogger|45: add_indexes migrated
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0102660
+15-2-3 20:39:58.4|Info|MigrationLogger|*** 46: fix_nzb_su_url migrating ***
+15-2-3 20:39:58.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.4|Info|fix_nzb_su_url|Starting migration  to 46
+15-2-3 20:39:58.4|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Indexers SET Settings = replace(Settings, '//nzb.su', '//api.nzb.su')WHERE Implementation = 'Newznab'AND Settings LIKE '%//nzb.su%'
+15-2-3 20:39:58.4|Debug|MigrationLogger|UPDATE Indexers SET Settings = replace(Settings, '//nzb.su', '//api.nzb.su')WHERE Implementation = 'Newznab'AND Settings LIKE '%//nzb.su%'
+15-2-3 20:39:58.4|Debug|MigrationLogger|Took: 00:00:00.0004660
+15-2-3 20:39:58.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (46, '2015-02-04T02:39:58', 'fix_nzb_su_url')
+15-2-3 20:39:58.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.5|Debug|MigrationLogger|46: fix_nzb_su_url migrated
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0097030
+15-2-3 20:39:58.5|Info|MigrationLogger|*** 47: add_temporary_blacklist_columns migrating ***
+15-2-3 20:39:58.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.5|Info|add_temporary_blacklist_columns|Starting migration  to 47
+15-2-3 20:39:58.5|Debug|MigrationLogger|AlterTable Blacklist
+15-2-3 20:39:58.5|Debug|MigrationLogger|
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0001730
+15-2-3 20:39:58.5|Debug|MigrationLogger|CreateColumn Blacklist PublishedDate DateTime
+15-2-3 20:39:58.5|Debug|MigrationLogger|ALTER TABLE "Blacklist" ADD COLUMN "PublishedDate" DATETIME
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0005050
+15-2-3 20:39:58.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (47, '2015-02-04T02:39:58', 'add_temporary_blacklist_columns')
+15-2-3 20:39:58.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.5|Debug|MigrationLogger|47: add_temporary_blacklist_columns migrated
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0048960
+15-2-3 20:39:58.5|Info|MigrationLogger|*** 48: add_title_to_scenemappings migrating ***
+15-2-3 20:39:58.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.5|Info|add_title_to_scenemappings|Starting migration  to 48
+15-2-3 20:39:58.5|Debug|MigrationLogger|AlterTable SceneMappings
+15-2-3 20:39:58.5|Debug|MigrationLogger|
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0001870
+15-2-3 20:39:58.5|Debug|MigrationLogger|CreateColumn SceneMappings Title String
+15-2-3 20:39:58.5|Debug|MigrationLogger|ALTER TABLE "SceneMappings" ADD COLUMN "Title" TEXT
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0004740
+15-2-3 20:39:58.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (48, '2015-02-04T02:39:58', 'add_title_to_scenemappings')
+15-2-3 20:39:58.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.5|Debug|MigrationLogger|48: add_title_to_scenemappings migrated
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0093120
+15-2-3 20:39:58.5|Info|MigrationLogger|*** 49: fix_dognzb_url migrating ***
+15-2-3 20:39:58.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.5|Info|fix_dognzb_url|Starting migration  to 49
+15-2-3 20:39:58.5|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Indexers SET Settings = replace(Settings, '//dognzb.cr', '//api.dognzb.cr')WHERE Implementation = 'Newznab'AND Settings LIKE '%//dognzb.cr%'
+15-2-3 20:39:58.5|Debug|MigrationLogger|UPDATE Indexers SET Settings = replace(Settings, '//dognzb.cr', '//api.dognzb.cr')WHERE Implementation = 'Newznab'AND Settings LIKE '%//dognzb.cr%'
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0004940
+15-2-3 20:39:58.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (49, '2015-02-04T02:39:58', 'fix_dognzb_url')
+15-2-3 20:39:58.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.5|Debug|MigrationLogger|49: fix_dognzb_url migrated
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0071950
+15-2-3 20:39:58.5|Info|MigrationLogger|*** 50: add_hash_to_metadata_files migrating ***
+15-2-3 20:39:58.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.5|Info|add_hash_to_metadata_files|Starting migration  to 50
+15-2-3 20:39:58.5|Debug|MigrationLogger|AlterTable MetadataFiles
+15-2-3 20:39:58.5|Debug|MigrationLogger|
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0001740
+15-2-3 20:39:58.5|Debug|MigrationLogger|CreateColumn MetadataFiles Hash String
+15-2-3 20:39:58.5|Debug|MigrationLogger|ALTER TABLE "MetadataFiles" ADD COLUMN "Hash" TEXT
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0004960
+15-2-3 20:39:58.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (50, '2015-02-04T02:39:58', 'add_hash_to_metadata_files')
+15-2-3 20:39:58.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.5|Debug|MigrationLogger|50: add_hash_to_metadata_files migrated
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0159040
+15-2-3 20:39:58.5|Info|MigrationLogger|*** 51: download_client_import migrating ***
+15-2-3 20:39:58.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.5|Info|download_client_import|Starting migration  to 51
+15-2-3 20:39:58.5|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.5|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0006530
+15-2-3 20:39:58.5|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.5|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0014710
+15-2-3 20:39:58.5|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.5|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0035320
+15-2-3 20:39:58.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (51, '2015-02-04T02:39:58', 'download_client_import')
+15-2-3 20:39:58.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.5|Debug|MigrationLogger|51: download_client_import migrated
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0079610
+15-2-3 20:39:58.5|Info|MigrationLogger|*** 52: add_columns_for_anime migrating ***
+15-2-3 20:39:58.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.5|Info|add_columns_for_anime|Starting migration  to 52
+15-2-3 20:39:58.5|Debug|MigrationLogger|AlterTable SceneMappings
+15-2-3 20:39:58.5|Debug|MigrationLogger|
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0001900
+15-2-3 20:39:58.5|Debug|MigrationLogger|CreateColumn SceneMappings Type String
+15-2-3 20:39:58.5|Debug|MigrationLogger|ALTER TABLE "SceneMappings" ADD COLUMN "Type" TEXT
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0004670
+15-2-3 20:39:58.5|Debug|MigrationLogger|ExecuteSqlStatement DELETE FROM SceneMappings
+15-2-3 20:39:58.5|Debug|MigrationLogger|DELETE FROM SceneMappings
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0002530
+15-2-3 20:39:58.5|Debug|MigrationLogger|AlterTable NamingConfig
+15-2-3 20:39:58.5|Debug|MigrationLogger|
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0001680
+15-2-3 20:39:58.5|Debug|MigrationLogger|CreateColumn NamingConfig AnimeEpisodeFormat String
+15-2-3 20:39:58.5|Debug|MigrationLogger|ALTER TABLE "NamingConfig" ADD COLUMN "AnimeEpisodeFormat" TEXT
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0004910
+15-2-3 20:39:58.5|Debug|MigrationLogger|ExecuteSqlStatement UPDATE NamingConfig SET AnimeEpisodeFormat = StandardEpisodeFormat
+15-2-3 20:39:58.5|Debug|MigrationLogger|UPDATE NamingConfig SET AnimeEpisodeFormat = StandardEpisodeFormat
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0003290
+15-2-3 20:39:58.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (52, '2015-02-04T02:39:58', 'add_columns_for_anime')
+15-2-3 20:39:58.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.5|Debug|MigrationLogger|52: add_columns_for_anime migrated
+15-2-3 20:39:58.5|Debug|MigrationLogger|Took: 00:00:00.0125540
+15-2-3 20:39:58.5|Info|MigrationLogger|*** 53: add_series_sorttitle migrating ***
+15-2-3 20:39:58.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.5|Info|add_series_sorttitle|Starting migration  to 53
+15-2-3 20:39:58.5|Debug|MigrationLogger|CreateColumn Series SortTitle String
+15-2-3 20:39:58.5|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "SortTitle" TEXT
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0005610
+15-2-3 20:39:58.6|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.6|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0005070
+15-2-3 20:39:58.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (53, '2015-02-04T02:39:58', 'add_series_sorttitle')
+15-2-3 20:39:58.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.6|Debug|MigrationLogger|53: add_series_sorttitle migrated
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0099010
+15-2-3 20:39:58.6|Info|MigrationLogger|*** 54: rename_profiles migrating ***
+15-2-3 20:39:58.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.6|Info|rename_profiles|Starting migration  to 54
+15-2-3 20:39:58.6|Debug|MigrationLogger|RenameTable QualityProfiles Profiles
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "QualityProfiles" RENAME TO "Profiles"
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0006010
+15-2-3 20:39:58.6|Debug|MigrationLogger|AlterTable Profiles
+15-2-3 20:39:58.6|Debug|MigrationLogger|
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0001740
+15-2-3 20:39:58.6|Debug|MigrationLogger|CreateColumn Profiles Language Int32
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "Profiles" ADD COLUMN "Language" INTEGER
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0004670
+15-2-3 20:39:58.6|Debug|MigrationLogger|AlterTable Profiles
+15-2-3 20:39:58.6|Debug|MigrationLogger|
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0001730
+15-2-3 20:39:58.6|Debug|MigrationLogger|CreateColumn Profiles GrabDelay Int32
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "Profiles" ADD COLUMN "GrabDelay" INTEGER
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0004650
+15-2-3 20:39:58.6|Debug|MigrationLogger|AlterTable Profiles
+15-2-3 20:39:58.6|Debug|MigrationLogger|
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0001700
+15-2-3 20:39:58.6|Debug|MigrationLogger|CreateColumn Profiles GrabDelayMode Int32
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "Profiles" ADD COLUMN "GrabDelayMode" INTEGER
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0004900
+15-2-3 20:39:58.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Profiles SET Language = 1, GrabDelay = 0, GrabDelayMode = 0
+15-2-3 20:39:58.6|Debug|MigrationLogger|UPDATE Profiles SET Language = 1, GrabDelay = 0, GrabDelayMode = 0
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0003320
+15-2-3 20:39:58.6|Debug|MigrationLogger|AlterTable Series
+15-2-3 20:39:58.6|Debug|MigrationLogger|
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0001890
+15-2-3 20:39:58.6|Debug|MigrationLogger|CreateColumn Series ProfileId Int32
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "ProfileId" INTEGER
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0005270
+15-2-3 20:39:58.6|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Series SET ProfileId = QualityProfileId
+15-2-3 20:39:58.6|Debug|MigrationLogger|UPDATE Series SET ProfileId = QualityProfileId
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0003180
+15-2-3 20:39:58.6|Debug|MigrationLogger|CreateTable PendingReleases
+15-2-3 20:39:58.6|Debug|MigrationLogger|CREATE TABLE "PendingReleases" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "Title" TEXT NOT NULL, "Added" DATETIME NOT NULL, "ParsedEpisodeInfo" TEXT NOT NULL, "Release" TEXT NOT NULL)
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0008450
+15-2-3 20:39:58.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (54, '2015-02-04T02:39:58', 'rename_profiles')
+15-2-3 20:39:58.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.6|Debug|MigrationLogger|54: rename_profiles migrated
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0136140
+15-2-3 20:39:58.6|Info|MigrationLogger|*** 55: drop_old_profile_columns migrating ***
+15-2-3 20:39:58.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.6|Info|drop_old_profile_columns|Starting migration  to 55
+15-2-3 20:39:58.6|Debug|MigrationLogger|DeleteColumn Series QualityProfileId
+15-2-3 20:39:58.6|Debug|MigrationLogger|CREATE TABLE "Series_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "TvdbId" INTEGER NOT NULL, "TvRageId" INTEGER NOT NULL, "ImdbId" TEXT, "Title" TEXT NOT NULL, "TitleSlug" TEXT, "CleanTitle" TEXT NOT NULL, "Status" INTEGER NOT NULL, "Overview" TEXT, "AirTime" TEXT, "Images" TEXT NOT NULL, "Path" TEXT NOT NULL, "Monitored" INTEGER NOT NULL, "SeasonFolder" INTEGER NOT NULL, "LastInfoSync" DATETIME, "LastDiskSync" DATETIME, "Runtime" INTEGER NOT NULL, "SeriesType" INTEGER NOT NULL, "Network" TEXT, "UseSceneNumbering" INTEGER NOT NULL, "FirstAired" DATETIME, "NextAiring" DATETIME, "Year" INTEGER, "Seasons" TEXT, "Actors" TEXT, "Ratings" TEXT, "Genres" TEXT, "Certification" TEXT, "SortTitle" TEXT, "ProfileId" INTEGER)
+15-2-3 20:39:58.6|Debug|MigrationLogger|INSERT INTO "Series_temp" SELECT "Id", "TvdbId", "TvRageId", "ImdbId", "Title", "TitleSlug", "CleanTitle", "Status", "Overview", "AirTime", "Images", "Path", "Monitored", "SeasonFolder", "LastInfoSync", "LastDiskSync", "Runtime", "SeriesType", "Network", "UseSceneNumbering", "FirstAired", "NextAiring", "Year", "Seasons", "Actors", "Ratings", "Genres", "Certification", "SortTitle", "ProfileId" FROM "Series"
+15-2-3 20:39:58.6|Debug|MigrationLogger|DROP TABLE "Series"
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "Series_temp" RENAME TO "Series"
+15-2-3 20:39:58.6|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TvdbId" ON "Series" ("TvdbId" ASC)
+15-2-3 20:39:58.6|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Series_TitleSlug" ON "Series" ("TitleSlug" ASC)
+15-2-3 20:39:58.6|Debug|MigrationLogger|CREATE INDEX "IX_Series_Path" ON "Series" ("Path" ASC)
+15-2-3 20:39:58.6|Debug|MigrationLogger|CREATE INDEX "IX_Series_CleanTitle" ON "Series" ("CleanTitle" ASC)
+15-2-3 20:39:58.6|Debug|MigrationLogger|CREATE INDEX "IX_Series_TvRageId" ON "Series" ("TvRageId" ASC)
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0192880
+15-2-3 20:39:58.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (55, '2015-02-04T02:39:58', 'drop_old_profile_columns')
+15-2-3 20:39:58.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.6|Debug|MigrationLogger|55: drop_old_profile_columns migrated
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0286640
+15-2-3 20:39:58.6|Info|MigrationLogger|*** 56: add_mediainfo_to_episodefile migrating ***
+15-2-3 20:39:58.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.6|Info|add_mediainfo_to_episodefile|Starting migration  to 56
+15-2-3 20:39:58.6|Debug|MigrationLogger|AlterTable EpisodeFiles
+15-2-3 20:39:58.6|Debug|MigrationLogger|
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0001730
+15-2-3 20:39:58.6|Debug|MigrationLogger|CreateColumn EpisodeFiles MediaInfo String
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "EpisodeFiles" ADD COLUMN "MediaInfo" TEXT
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0005220
+15-2-3 20:39:58.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (56, '2015-02-04T02:39:58', 'add_mediainfo_to_episodefile')
+15-2-3 20:39:58.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.6|Debug|MigrationLogger|56: add_mediainfo_to_episodefile migrated
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0123580
+15-2-3 20:39:58.6|Info|MigrationLogger|*** 57: convert_episode_file_path_to_relative migrating ***
+15-2-3 20:39:58.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.6|Info|convert_episode_file_path_to_relative|Starting migration  to 57
+15-2-3 20:39:58.6|Debug|MigrationLogger|CreateColumn EpisodeFiles RelativePath String
+15-2-3 20:39:58.6|Debug|MigrationLogger|ALTER TABLE "EpisodeFiles" ADD COLUMN "RelativePath" TEXT
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0005210
+15-2-3 20:39:58.6|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.6|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.6|Debug|MigrationLogger|Took: 00:00:00.0005160
+15-2-3 20:39:58.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (57, '2015-02-04T02:39:58', 'convert_episode_file_path_to_relative')
+15-2-3 20:39:58.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.7|Debug|MigrationLogger|57: convert_episode_file_path_to_relative migrated
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0103520
+15-2-3 20:39:58.7|Info|MigrationLogger|*** 58: drop_episode_file_path migrating ***
+15-2-3 20:39:58.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.7|Info|drop_episode_file_path|Starting migration  to 58
+15-2-3 20:39:58.7|Debug|MigrationLogger|DeleteColumn EpisodeFiles Path
+15-2-3 20:39:58.7|Debug|MigrationLogger|CREATE TABLE "EpisodeFiles_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "SeriesId" INTEGER NOT NULL, "Quality" TEXT NOT NULL, "Size" INTEGER NOT NULL, "DateAdded" DATETIME NOT NULL, "SeasonNumber" INTEGER NOT NULL, "SceneName" TEXT, "ReleaseGroup" TEXT, "MediaInfo" TEXT, "RelativePath" TEXT)
+15-2-3 20:39:58.7|Debug|MigrationLogger|INSERT INTO "EpisodeFiles_temp" SELECT "Id", "SeriesId", "Quality", "Size", "DateAdded", "SeasonNumber", "SceneName", "ReleaseGroup", "MediaInfo", "RelativePath" FROM "EpisodeFiles"
+15-2-3 20:39:58.7|Debug|MigrationLogger|DROP TABLE "EpisodeFiles"
+15-2-3 20:39:58.7|Debug|MigrationLogger|ALTER TABLE "EpisodeFiles_temp" RENAME TO "EpisodeFiles"
+15-2-3 20:39:58.7|Debug|MigrationLogger|CREATE INDEX "IX_EpisodeFiles_SeriesId" ON "EpisodeFiles" ("SeriesId" ASC)
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0155230
+15-2-3 20:39:58.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (58, '2015-02-04T02:39:58', 'drop_episode_file_path')
+15-2-3 20:39:58.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.7|Debug|MigrationLogger|58: drop_episode_file_path migrated
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0245010
+15-2-3 20:39:58.7|Info|MigrationLogger|*** 59: add_enable_options_to_indexers migrating ***
+15-2-3 20:39:58.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.7|Info|add_enable_options_to_indexers|Starting migration  to 59
+15-2-3 20:39:58.7|Debug|MigrationLogger|AlterTable Indexers
+15-2-3 20:39:58.7|Debug|MigrationLogger|
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0001730
+15-2-3 20:39:58.7|Debug|MigrationLogger|CreateColumn Indexers EnableRss Boolean
+15-2-3 20:39:58.7|Debug|MigrationLogger|ALTER TABLE "Indexers" ADD COLUMN "EnableRss" INTEGER
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0005000
+15-2-3 20:39:58.7|Debug|MigrationLogger|CreateColumn Indexers EnableSearch Boolean
+15-2-3 20:39:58.7|Debug|MigrationLogger|ALTER TABLE "Indexers" ADD COLUMN "EnableSearch" INTEGER
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0004790
+15-2-3 20:39:58.7|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Indexers SET EnableRss = Enable, EnableSearch = Enable
+15-2-3 20:39:58.7|Debug|MigrationLogger|UPDATE Indexers SET EnableRss = Enable, EnableSearch = Enable
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0030320
+15-2-3 20:39:58.7|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Indexers SET EnableSearch = 0 WHERE Implementation = 'Wombles'
+15-2-3 20:39:58.7|Debug|MigrationLogger|UPDATE Indexers SET EnableSearch = 0 WHERE Implementation = 'Wombles'
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0003400
+15-2-3 20:39:58.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (59, '2015-02-04T02:39:58', 'add_enable_options_to_indexers')
+15-2-3 20:39:58.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.7|Debug|MigrationLogger|59: add_enable_options_to_indexers migrated
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0135210
+15-2-3 20:39:58.7|Info|MigrationLogger|*** 60: remove_enable_from_indexers migrating ***
+15-2-3 20:39:58.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.7|Info|remove_enable_from_indexers|Starting migration  to 60
+15-2-3 20:39:58.7|Debug|MigrationLogger|DeleteColumn Indexers Enable
+15-2-3 20:39:58.7|Debug|MigrationLogger|CREATE TABLE "Indexers_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Name" TEXT NOT NULL, "Implementation" TEXT NOT NULL, "Settings" TEXT, "ConfigContract" TEXT, "EnableRss" INTEGER, "EnableSearch" INTEGER)
+15-2-3 20:39:58.7|Debug|MigrationLogger|INSERT INTO "Indexers_temp" SELECT "Id", "Name", "Implementation", "Settings", "ConfigContract", "EnableRss", "EnableSearch" FROM "Indexers"
+15-2-3 20:39:58.7|Debug|MigrationLogger|DROP TABLE "Indexers"
+15-2-3 20:39:58.7|Debug|MigrationLogger|ALTER TABLE "Indexers_temp" RENAME TO "Indexers"
+15-2-3 20:39:58.7|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_Indexers_Name" ON "Indexers" ("Name" ASC)
+15-2-3 20:39:58.7|Debug|MigrationLogger|Took: 00:00:00.0150360
+15-2-3 20:39:58.7|Debug|MigrationLogger|DeleteColumn DownloadClients Protocol
+15-2-3 20:39:58.7|Debug|MigrationLogger|CREATE TABLE "DownloadClients_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Enable" INTEGER NOT NULL, "Name" TEXT NOT NULL, "Implementation" TEXT NOT NULL, "Settings" TEXT NOT NULL, "ConfigContract" TEXT NOT NULL)
+15-2-3 20:39:58.8|Debug|MigrationLogger|INSERT INTO "DownloadClients_temp" SELECT "Id", "Enable", "Name", "Implementation", "Settings", "ConfigContract" FROM "DownloadClients"
+15-2-3 20:39:58.8|Debug|MigrationLogger|DROP TABLE "DownloadClients"
+15-2-3 20:39:58.8|Debug|MigrationLogger|ALTER TABLE "DownloadClients_temp" RENAME TO "DownloadClients"
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0231750
+15-2-3 20:39:58.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (60, '2015-02-04T02:39:58', 'remove_enable_from_indexers')
+15-2-3 20:39:58.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.8|Debug|MigrationLogger|60: remove_enable_from_indexers migrated
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0358190
+15-2-3 20:39:58.8|Info|MigrationLogger|*** 61: clear_bad_scene_names migrating ***
+15-2-3 20:39:58.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.8|Info|clear_bad_scene_names|Starting migration  to 61
+15-2-3 20:39:58.8|Debug|MigrationLogger|ExecuteSqlStatement UPDATE [EpisodeFiles] SET ReleaseGroup = NULL , SceneName = NULL WHERE    ReleaseGroup IS NULL    OR SceneName IS NULL    OR ReleaseGroup =='DRONE'    OR LENGTH(SceneName) <10    OR LENGTH(ReleaseGroup) > 20    OR SceneName NOT LIKE '%.%'
+15-2-3 20:39:58.8|Debug|MigrationLogger|UPDATE [EpisodeFiles] SET ReleaseGroup = NULL , SceneName = NULL WHERE    ReleaseGroup IS NULL    OR SceneName IS NULL    OR ReleaseGroup =='DRONE'    OR LENGTH(SceneName) <10    OR LENGTH(ReleaseGroup) > 20    OR SceneName NOT LIKE '%.%'
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0006490
+15-2-3 20:39:58.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (61, '2015-02-04T02:39:58', 'clear_bad_scene_names')
+15-2-3 20:39:58.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.8|Debug|MigrationLogger|61: clear_bad_scene_names migrated
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0118200
+15-2-3 20:39:58.8|Info|MigrationLogger|*** 62: convert_quality_models migrating ***
+15-2-3 20:39:58.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.8|Info|convert_quality_models|Starting migration  to 62
+15-2-3 20:39:58.8|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.8|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0011650
+15-2-3 20:39:58.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (62, '2015-02-04T02:39:58', 'convert_quality_models')
+15-2-3 20:39:58.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.8|Debug|MigrationLogger|62: convert_quality_models migrated
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0119270
+15-2-3 20:39:58.8|Info|MigrationLogger|*** 63: add_remotepathmappings migrating ***
+15-2-3 20:39:58.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.8|Info|add_remotepathmappings|Starting migration  to 63
+15-2-3 20:39:58.8|Debug|MigrationLogger|CreateTable RemotePathMappings
+15-2-3 20:39:58.8|Debug|MigrationLogger|CREATE TABLE "RemotePathMappings" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Host" TEXT NOT NULL, "RemotePath" TEXT NOT NULL, "LocalPath" TEXT NOT NULL)
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0007220
+15-2-3 20:39:58.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (63, '2015-02-04T02:39:58', 'add_remotepathmappings')
+15-2-3 20:39:58.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.8|Debug|MigrationLogger|63: add_remotepathmappings migrated
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0155750
+15-2-3 20:39:58.8|Info|MigrationLogger|*** 64: remove_method_from_logs migrating ***
+15-2-3 20:39:58.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.8|Info|remove_method_from_logs|Starting migration  to 64
+15-2-3 20:39:58.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (64, '2015-02-04T02:39:58', 'remove_method_from_logs')
+15-2-3 20:39:58.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.8|Debug|MigrationLogger|64: remove_method_from_logs migrated
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0154080
+15-2-3 20:39:58.8|Info|MigrationLogger|*** 65: make_scene_numbering_nullable migrating ***
+15-2-3 20:39:58.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.8|Info|make_scene_numbering_nullable|Starting migration  to 65
+15-2-3 20:39:58.8|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Episodes SET AbsoluteEpisodeNumber = NULL WHERE AbsoluteEpisodeNumber = 0
+15-2-3 20:39:58.8|Debug|MigrationLogger|UPDATE Episodes SET AbsoluteEpisodeNumber = NULL WHERE AbsoluteEpisodeNumber = 0
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0003640
+15-2-3 20:39:58.8|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Episodes SET SceneAbsoluteEpisodeNumber = NULL WHERE SceneAbsoluteEpisodeNumber = 0
+15-2-3 20:39:58.8|Debug|MigrationLogger|UPDATE Episodes SET SceneAbsoluteEpisodeNumber = NULL WHERE SceneAbsoluteEpisodeNumber = 0
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0003920
+15-2-3 20:39:58.8|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Episodes SET SceneSeasonNumber = NULL, SceneEpisodeNumber = NULL WHERE SceneSeasonNumber = 0 AND SceneEpisodeNumber = 0
+15-2-3 20:39:58.8|Debug|MigrationLogger|UPDATE Episodes SET SceneSeasonNumber = NULL, SceneEpisodeNumber = NULL WHERE SceneSeasonNumber = 0 AND SceneEpisodeNumber = 0
+15-2-3 20:39:58.8|Debug|MigrationLogger|Took: 00:00:00.0004500
+15-2-3 20:39:58.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (65, '2015-02-04T02:39:58', 'make_scene_numbering_nullable')
+15-2-3 20:39:58.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.9|Debug|MigrationLogger|65: make_scene_numbering_nullable migrated
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0151120
+15-2-3 20:39:58.9|Info|MigrationLogger|*** 66: add_tags migrating ***
+15-2-3 20:39:58.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.9|Info|add_tags|Starting migration  to 66
+15-2-3 20:39:58.9|Debug|MigrationLogger|CreateTable Tags
+15-2-3 20:39:58.9|Debug|MigrationLogger|CREATE TABLE "Tags" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Label" TEXT NOT NULL)
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0005570
+15-2-3 20:39:58.9|Debug|MigrationLogger|AlterTable Series
+15-2-3 20:39:58.9|Debug|MigrationLogger|
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0001960
+15-2-3 20:39:58.9|Debug|MigrationLogger|CreateColumn Series Tags String
+15-2-3 20:39:58.9|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Tags" TEXT
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0005290
+15-2-3 20:39:58.9|Debug|MigrationLogger|AlterTable Notifications
+15-2-3 20:39:58.9|Debug|MigrationLogger|
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0001700
+15-2-3 20:39:58.9|Debug|MigrationLogger|CreateColumn Notifications Tags String
+15-2-3 20:39:58.9|Debug|MigrationLogger|ALTER TABLE "Notifications" ADD COLUMN "Tags" TEXT
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0004620
+15-2-3 20:39:58.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (66, '2015-02-04T02:39:58', 'add_tags')
+15-2-3 20:39:58.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.9|Debug|MigrationLogger|66: add_tags migrated
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0128900
+15-2-3 20:39:58.9|Info|MigrationLogger|*** 67: add_added_to_series migrating ***
+15-2-3 20:39:58.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.9|Info|add_added_to_series|Starting migration  to 67
+15-2-3 20:39:58.9|Debug|MigrationLogger|AlterTable Series
+15-2-3 20:39:58.9|Debug|MigrationLogger|
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0001730
+15-2-3 20:39:58.9|Debug|MigrationLogger|CreateColumn Series Added DateTime
+15-2-3 20:39:58.9|Debug|MigrationLogger|ALTER TABLE "Series" ADD COLUMN "Added" DATETIME
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0005590
+15-2-3 20:39:58.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (67, '2015-02-04T02:39:58', 'add_added_to_series')
+15-2-3 20:39:58.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.9|Debug|MigrationLogger|67: add_added_to_series migrated
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0109560
+15-2-3 20:39:58.9|Info|MigrationLogger|*** 68: add_release_restrictions migrating ***
+15-2-3 20:39:58.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.9|Info|add_release_restrictions|Starting migration  to 68
+15-2-3 20:39:58.9|Debug|MigrationLogger|CreateTable Restrictions
+15-2-3 20:39:58.9|Debug|MigrationLogger|CREATE TABLE "Restrictions" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Required" TEXT, "Preferred" TEXT, "Ignored" TEXT, "Tags" TEXT NOT NULL)
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0006980
+15-2-3 20:39:58.9|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.9|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0004780
+15-2-3 20:39:58.9|Debug|MigrationLogger|ExecuteSqlStatement DELETE FROM Config WHERE [Key] = 'releaserestrictions'
+15-2-3 20:39:58.9|Debug|MigrationLogger|DELETE FROM Config WHERE [Key] = 'releaserestrictions'
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0003100
+15-2-3 20:39:58.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (68, '2015-02-04T02:39:58', 'add_release_restrictions')
+15-2-3 20:39:58.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.9|Debug|MigrationLogger|68: add_release_restrictions migrated
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0138020
+15-2-3 20:39:58.9|Info|MigrationLogger|*** 69: quality_proper migrating ***
+15-2-3 20:39:58.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.9|Info|quality_proper|Starting migration  to 69
+15-2-3 20:39:58.9|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.9|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0004940
+15-2-3 20:39:58.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (69, '2015-02-04T02:39:58', 'quality_proper')
+15-2-3 20:39:58.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:58.9|Debug|MigrationLogger|69: quality_proper migrated
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0114320
+15-2-3 20:39:58.9|Info|MigrationLogger|*** 70: delay_profile migrating ***
+15-2-3 20:39:58.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:58.9|Info|delay_profile|Starting migration  to 70
+15-2-3 20:39:58.9|Debug|MigrationLogger|CreateTable DelayProfiles
+15-2-3 20:39:58.9|Debug|MigrationLogger|CREATE TABLE "DelayProfiles" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "EnableUsenet" INTEGER NOT NULL, "EnableTorrent" INTEGER NOT NULL, "PreferredProtocol" INTEGER NOT NULL, "UsenetDelay" INTEGER NOT NULL, "TorrentDelay" INTEGER NOT NULL, "Order" INTEGER NOT NULL, "Tags" TEXT NOT NULL)
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0010700
+15-2-3 20:39:58.9|Debug|MigrationLogger|INSERT INTO "DelayProfiles" ("EnableUsenet", "EnableTorrent", "PreferredProtocol", "UsenetDelay", "TorrentDelay", "Order", "Tags") VALUES (1, 1, 1, 0, 0, 2147483647, '[]')
+15-2-3 20:39:58.9|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:58.9|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:58.9|Debug|MigrationLogger|Took: 00:00:00.0017540
+15-2-3 20:39:58.9|Debug|MigrationLogger|DeleteColumn Profiles GrabDelay
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE TABLE "Profiles_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Name" TEXT NOT NULL, "Cutoff" INTEGER NOT NULL, "Items" TEXT NOT NULL, "Language" INTEGER, "GrabDelayMode" INTEGER)
+15-2-3 20:39:59.0|Debug|MigrationLogger|INSERT INTO "Profiles_temp" SELECT "Id", "Name", "Cutoff", "Items", "Language", "GrabDelayMode" FROM "Profiles"
+15-2-3 20:39:59.0|Debug|MigrationLogger|DROP TABLE "Profiles"
+15-2-3 20:39:59.0|Debug|MigrationLogger|ALTER TABLE "Profiles_temp" RENAME TO "Profiles"
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityProfiles_Name" ON "Profiles" ("Name" ASC)
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0189990
+15-2-3 20:39:59.0|Debug|MigrationLogger|DeleteColumn Profiles GrabDelayMode
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE TABLE "Profiles_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Name" TEXT NOT NULL, "Cutoff" INTEGER NOT NULL, "Items" TEXT NOT NULL, "Language" INTEGER)
+15-2-3 20:39:59.0|Debug|MigrationLogger|INSERT INTO "Profiles_temp" SELECT "Id", "Name", "Cutoff", "Items", "Language" FROM "Profiles"
+15-2-3 20:39:59.0|Debug|MigrationLogger|DROP TABLE "Profiles"
+15-2-3 20:39:59.0|Debug|MigrationLogger|ALTER TABLE "Profiles_temp" RENAME TO "Profiles"
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityProfiles_Name" ON "Profiles" ("Name" ASC)
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0209760
+15-2-3 20:39:59.0|Debug|MigrationLogger|-> 1 Insert operations completed in 00:00:00.0007350 taking an average of 00:00:00.0007350
+15-2-3 20:39:59.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (70, '2015-02-04T02:39:59', 'delay_profile')
+15-2-3 20:39:59.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.0|Debug|MigrationLogger|70: delay_profile migrated
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0266270
+15-2-3 20:39:59.0|Info|MigrationLogger|*** 71: unknown_quality_in_profile migrating ***
+15-2-3 20:39:59.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.0|Info|unknown_quality_in_profile|Starting migration  to 71
+15-2-3 20:39:59.0|Debug|MigrationLogger|DeleteColumn QualityDefinitions Weight
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE TABLE "QualityDefinitions_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Quality" INTEGER NOT NULL, "Title" TEXT NOT NULL, "MinSize" INTEGER NOT NULL, "MaxSize" INTEGER NOT NULL)
+15-2-3 20:39:59.0|Debug|MigrationLogger|INSERT INTO "QualityDefinitions_temp" SELECT "Id", "Quality", "Title", "MinSize", "MaxSize" FROM "QualityDefinitions"
+15-2-3 20:39:59.0|Debug|MigrationLogger|DROP TABLE "QualityDefinitions"
+15-2-3 20:39:59.0|Debug|MigrationLogger|ALTER TABLE "QualityDefinitions_temp" RENAME TO "QualityDefinitions"
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityDefinitions_Quality" ON "QualityDefinitions" ("Quality" ASC)
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE UNIQUE INDEX "IX_QualityDefinitions_Title" ON "QualityDefinitions" ("Title" ASC)
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0220740
+15-2-3 20:39:59.0|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:59.0|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0012790
+15-2-3 20:39:59.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (71, '2015-02-04T02:39:59', 'unknown_quality_in_profile')
+15-2-3 20:39:59.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.0|Debug|MigrationLogger|71: unknown_quality_in_profile migrated
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0130620
+15-2-3 20:39:59.0|Info|MigrationLogger|*** 72: history_downloadId migrating ***
+15-2-3 20:39:59.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.0|Info|history_downloadId|Starting migration  to 72
+15-2-3 20:39:59.0|Debug|MigrationLogger|AlterTable History
+15-2-3 20:39:59.0|Debug|MigrationLogger|
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0001760
+15-2-3 20:39:59.0|Debug|MigrationLogger|CreateColumn History DownloadId String
+15-2-3 20:39:59.0|Debug|MigrationLogger|ALTER TABLE "History" ADD COLUMN "DownloadId" TEXT
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0005060
+15-2-3 20:39:59.0|Debug|MigrationLogger|CreateIndex History (DownloadId)
+15-2-3 20:39:59.0|Debug|MigrationLogger|CREATE INDEX "IX_History_DownloadId" ON "History" ("DownloadId" ASC)
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0004780
+15-2-3 20:39:59.0|Debug|MigrationLogger|PerformDBOperation 
+15-2-3 20:39:59.0|Debug|MigrationLogger|Performing DB Operation
+15-2-3 20:39:59.0|Debug|MigrationLogger|Took: 00:00:00.0004360
+15-2-3 20:39:59.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (72, '2015-02-04T02:39:59', 'history_downloadId')
+15-2-3 20:39:59.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.1|Debug|MigrationLogger|72: history_downloadId migrated
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0127530
+15-2-3 20:39:59.1|Info|MigrationLogger|*** 73: clear_ratings migrating ***
+15-2-3 20:39:59.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.1|Info|clear_ratings|Starting migration  to 73
+15-2-3 20:39:59.1|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:59.1|Debug|MigrationLogger|UPDATE "Series" SET "Ratings" = '{}' WHERE 1 = 1
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0003980
+15-2-3 20:39:59.1|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:59.1|Debug|MigrationLogger|UPDATE "Episodes" SET "Ratings" = '{}' WHERE 1 = 1
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0003600
+15-2-3 20:39:59.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (73, '2015-02-04T02:39:59', 'clear_ratings')
+15-2-3 20:39:59.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.1|Debug|MigrationLogger|73: clear_ratings migrated
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0103150
+15-2-3 20:39:59.1|Info|MigrationLogger|*** 74: disable_eztv migrating ***
+15-2-3 20:39:59.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.1|Info|disable_eztv|Starting migration  to 74
+15-2-3 20:39:59.1|Debug|MigrationLogger|ExecuteSqlStatement UPDATE Indexers SET EnableRss = 0, EnableSearch = 0 WHERE Implementation = 'Eztv' AND Settings LIKE '%ezrss.it%'
+15-2-3 20:39:59.1|Debug|MigrationLogger|UPDATE Indexers SET EnableRss = 0, EnableSearch = 0 WHERE Implementation = 'Eztv' AND Settings LIKE '%ezrss.it%'
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0004480
+15-2-3 20:39:59.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (74, '2015-02-04T02:39:59', 'disable_eztv')
+15-2-3 20:39:59.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.1|Debug|MigrationLogger|74: disable_eztv migrated
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0151860
+15-2-3 20:39:59.1|Info|MigrationLogger|*** 75: force_lib_update migrating ***
+15-2-3 20:39:59.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.1|Info|force_lib_update|Starting migration  to 75
+15-2-3 20:39:59.1|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:59.1|Debug|MigrationLogger|UPDATE "ScheduledTasks" SET "LastExecution" = '2014-01-01 00:00:00' WHERE "TypeName" = 'NzbDrone.Core.Tv.Commands.RefreshSeriesCommand'
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0005510
+15-2-3 20:39:59.1|Debug|MigrationLogger|UpdateData 
+15-2-3 20:39:59.1|Debug|MigrationLogger|UPDATE "Series" SET "LastInfoSync" = '2014-01-01 00:00:00' WHERE 1 = 1
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0004100
+15-2-3 20:39:59.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (75, '2015-02-04T02:39:59', 'force_lib_update')
+15-2-3 20:39:59.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.1|Debug|MigrationLogger|75: force_lib_update migrated
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:00.0108610
+15-2-3 20:39:59.1|Debug|MigrationLogger|Took: 00:00:02.2812996
+15-2-3 20:39:59.1|Info|MigrationLogger|*** Migrating data source=/home/rps/.config/NzbDrone/logs.db;cache size=-10485760;datetimekind=Utc;journal mode=Wal;pooling=True;version=3 ***
+15-2-3 20:39:59.2|Info|MigrationLogger|*** VersionMigration migrating ***
+15-2-3 20:39:59.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|CreateTable VersionInfo
+15-2-3 20:39:59.2|Debug|MigrationLogger|CREATE TABLE "VersionInfo" ("Version" INTEGER NOT NULL)
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0004810
+15-2-3 20:39:59.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|VersionMigration migrated
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0250030
+15-2-3 20:39:59.2|Info|MigrationLogger|*** VersionUniqueMigration migrating ***
+15-2-3 20:39:59.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|CreateIndex VersionInfo (Version)
+15-2-3 20:39:59.2|Debug|MigrationLogger|CREATE UNIQUE INDEX "UC_Version" ON "VersionInfo" ("Version" ASC)
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0007350
+15-2-3 20:39:59.2|Debug|MigrationLogger|AlterTable VersionInfo
+15-2-3 20:39:59.2|Debug|MigrationLogger|
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0001720
+15-2-3 20:39:59.2|Debug|MigrationLogger|CreateColumn VersionInfo AppliedOn DateTime
+15-2-3 20:39:59.2|Debug|MigrationLogger|ALTER TABLE "VersionInfo" ADD COLUMN "AppliedOn" DATETIME
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0004890
+15-2-3 20:39:59.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|VersionUniqueMigration migrated
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0126210
+15-2-3 20:39:59.2|Info|MigrationLogger|*** VersionDescriptionMigration migrating ***
+15-2-3 20:39:59.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|AlterTable VersionInfo
+15-2-3 20:39:59.2|Debug|MigrationLogger|
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0001900
+15-2-3 20:39:59.2|Debug|MigrationLogger|CreateColumn VersionInfo Description String
+15-2-3 20:39:59.2|Debug|MigrationLogger|ALTER TABLE "VersionInfo" ADD COLUMN "Description" TEXT
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0004570
+15-2-3 20:39:59.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|VersionDescriptionMigration migrated
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0057570
+15-2-3 20:39:59.2|Info|MigrationLogger|*** 1: InitialSetup migrating ***
+15-2-3 20:39:59.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.2|Info|InitialSetup|Starting migration to 1
+15-2-3 20:39:59.2|Debug|MigrationLogger|CreateTable Logs
+15-2-3 20:39:59.2|Debug|MigrationLogger|CREATE TABLE "Logs" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Message" TEXT NOT NULL, "Time" DATETIME NOT NULL, "Logger" TEXT NOT NULL, "Method" TEXT, "Exception" TEXT, "ExceptionType" TEXT, "Level" TEXT NOT NULL)
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0009590
+15-2-3 20:39:59.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (1, '2015-02-04T02:39:59', 'InitialSetup')
+15-2-3 20:39:59.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|1: InitialSetup migrated
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0101610
+15-2-3 20:39:59.2|Info|MigrationLogger|*** 2: remove_tvrage_imdb_unique_constraint migrating ***
+15-2-3 20:39:59.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.2|Info|remove_tvrage_imdb_unique_constraint|Starting migration to 2
+15-2-3 20:39:59.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (2, '2015-02-04T02:39:59', 'remove_tvrage_imdb_unique_constraint')
+15-2-3 20:39:59.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.2|Debug|MigrationLogger|2: remove_tvrage_imdb_unique_constraint migrated
+15-2-3 20:39:59.2|Debug|MigrationLogger|Took: 00:00:00.0071970
+15-2-3 20:39:59.2|Info|MigrationLogger|*** 3: remove_renamed_scene_mapping_columns migrating ***
+15-2-3 20:39:59.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.2|Info|remove_renamed_scene_mapping_columns|Starting migration to 3
+15-2-3 20:39:59.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (3, '2015-02-04T02:39:59', 'remove_renamed_scene_mapping_columns')
+15-2-3 20:39:59.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.3|Debug|MigrationLogger|3: remove_renamed_scene_mapping_columns migrated
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0272900
+15-2-3 20:39:59.3|Info|MigrationLogger|*** 4: updated_history migrating ***
+15-2-3 20:39:59.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.3|Info|updated_history|Starting migration to 4
+15-2-3 20:39:59.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (4, '2015-02-04T02:39:59', 'updated_history')
+15-2-3 20:39:59.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.3|Debug|MigrationLogger|4: updated_history migrated
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0109280
+15-2-3 20:39:59.3|Info|MigrationLogger|*** 5: added_eventtype_to_history migrating ***
+15-2-3 20:39:59.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.3|Info|added_eventtype_to_history|Starting migration to 5
+15-2-3 20:39:59.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (5, '2015-02-04T02:39:59', 'added_eventtype_to_history')
+15-2-3 20:39:59.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.3|Debug|MigrationLogger|5: added_eventtype_to_history migrated
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0088280
+15-2-3 20:39:59.3|Info|MigrationLogger|*** 6: add_index_to_log_time migrating ***
+15-2-3 20:39:59.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.3|Info|add_index_to_log_time|Starting migration to 6
+15-2-3 20:39:59.3|Debug|MigrationLogger|DeleteTable Logs
+15-2-3 20:39:59.3|Debug|MigrationLogger|DROP TABLE "Logs"
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0005470
+15-2-3 20:39:59.3|Debug|MigrationLogger|CreateTable Logs
+15-2-3 20:39:59.3|Debug|MigrationLogger|CREATE TABLE "Logs" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Message" TEXT NOT NULL, "Time" DATETIME NOT NULL, "Logger" TEXT NOT NULL, "Method" TEXT, "Exception" TEXT, "ExceptionType" TEXT, "Level" TEXT NOT NULL)
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0008800
+15-2-3 20:39:59.3|Debug|MigrationLogger|CreateIndex Logs (Time)
+15-2-3 20:39:59.3|Debug|MigrationLogger|CREATE INDEX "IX_Logs_Time" ON "Logs" ("Time" ASC)
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0004060
+15-2-3 20:39:59.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (6, '2015-02-04T02:39:59', 'add_index_to_log_time')
+15-2-3 20:39:59.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.3|Debug|MigrationLogger|6: add_index_to_log_time migrated
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0136890
+15-2-3 20:39:59.3|Info|MigrationLogger|*** 7: add_renameEpisodes_to_naming migrating ***
+15-2-3 20:39:59.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.3|Info|add_renameEpisodes_to_naming|Starting migration to 7
+15-2-3 20:39:59.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (7, '2015-02-04T02:39:59', 'add_renameEpisodes_to_naming')
+15-2-3 20:39:59.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.3|Debug|MigrationLogger|7: add_renameEpisodes_to_naming migrated
+15-2-3 20:39:59.3|Debug|MigrationLogger|Took: 00:00:00.0109900
+15-2-3 20:39:59.3|Info|MigrationLogger|*** 8: remove_backlog migrating ***
+15-2-3 20:39:59.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.3|Info|remove_backlog|Starting migration to 8
+15-2-3 20:39:59.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (8, '2015-02-04T02:39:59', 'remove_backlog')
+15-2-3 20:39:59.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.4|Debug|MigrationLogger|8: remove_backlog migrated
+15-2-3 20:39:59.4|Debug|MigrationLogger|Took: 00:00:00.0140650
+15-2-3 20:39:59.4|Info|MigrationLogger|*** 9: fix_rename_episodes migrating ***
+15-2-3 20:39:59.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.4|Info|fix_rename_episodes|Starting migration to 9
+15-2-3 20:39:59.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (9, '2015-02-04T02:39:59', 'fix_rename_episodes')
+15-2-3 20:39:59.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.4|Debug|MigrationLogger|9: fix_rename_episodes migrated
+15-2-3 20:39:59.4|Debug|MigrationLogger|Took: 00:00:00.0153190
+15-2-3 20:39:59.4|Info|MigrationLogger|*** 10: add_monitored migrating ***
+15-2-3 20:39:59.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.4|Info|add_monitored|Starting migration to 10
+15-2-3 20:39:59.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (10, '2015-02-04T02:39:59', 'add_monitored')
+15-2-3 20:39:59.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.4|Debug|MigrationLogger|10: add_monitored migrated
+15-2-3 20:39:59.4|Debug|MigrationLogger|Took: 00:00:00.0093460
+15-2-3 20:39:59.4|Info|MigrationLogger|*** 11: remove_ignored migrating ***
+15-2-3 20:39:59.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.4|Info|remove_ignored|Starting migration to 11
+15-2-3 20:39:59.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (11, '2015-02-04T02:39:59', 'remove_ignored')
+15-2-3 20:39:59.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.4|Debug|MigrationLogger|11: remove_ignored migrated
+15-2-3 20:39:59.4|Debug|MigrationLogger|Took: 00:00:00.0110720
+15-2-3 20:39:59.4|Info|MigrationLogger|*** 12: remove_custom_start_date migrating ***
+15-2-3 20:39:59.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.4|Info|remove_custom_start_date|Starting migration to 12
+15-2-3 20:39:59.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (12, '2015-02-04T02:39:59', 'remove_custom_start_date')
+15-2-3 20:39:59.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.4|Debug|MigrationLogger|12: remove_custom_start_date migrated
+15-2-3 20:39:59.4|Debug|MigrationLogger|Took: 00:00:00.0151680
+15-2-3 20:39:59.4|Info|MigrationLogger|*** 13: add_air_date_utc migrating ***
+15-2-3 20:39:59.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.4|Info|add_air_date_utc|Starting migration to 13
+15-2-3 20:39:59.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (13, '2015-02-04T02:39:59', 'add_air_date_utc')
+15-2-3 20:39:59.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.4|Debug|MigrationLogger|13: add_air_date_utc migrated
+15-2-3 20:39:59.4|Debug|MigrationLogger|Took: 00:00:00.0143800
+15-2-3 20:39:59.4|Info|MigrationLogger|*** 14: drop_air_date migrating ***
+15-2-3 20:39:59.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.4|Info|drop_air_date|Starting migration to 14
+15-2-3 20:39:59.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (14, '2015-02-04T02:39:59', 'drop_air_date')
+15-2-3 20:39:59.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.4|Debug|MigrationLogger|14: drop_air_date migrated
+15-2-3 20:39:59.4|Debug|MigrationLogger|Took: 00:00:00.0125700
+15-2-3 20:39:59.5|Info|MigrationLogger|*** 15: add_air_date_as_string migrating ***
+15-2-3 20:39:59.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.5|Info|add_air_date_as_string|Starting migration to 15
+15-2-3 20:39:59.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (15, '2015-02-04T02:39:59', 'add_air_date_as_string')
+15-2-3 20:39:59.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.5|Debug|MigrationLogger|15: add_air_date_as_string migrated
+15-2-3 20:39:59.5|Debug|MigrationLogger|Took: 00:00:00.0092720
+15-2-3 20:39:59.5|Info|MigrationLogger|*** 16: updated_imported_history_item migrating ***
+15-2-3 20:39:59.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.5|Info|updated_imported_history_item|Starting migration to 16
+15-2-3 20:39:59.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (16, '2015-02-04T02:39:59', 'updated_imported_history_item')
+15-2-3 20:39:59.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.5|Debug|MigrationLogger|16: updated_imported_history_item migrated
+15-2-3 20:39:59.5|Debug|MigrationLogger|Took: 00:00:00.0106780
+15-2-3 20:39:59.5|Info|MigrationLogger|*** 17: reset_scene_names migrating ***
+15-2-3 20:39:59.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.5|Info|reset_scene_names|Starting migration to 17
+15-2-3 20:39:59.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (17, '2015-02-04T02:39:59', 'reset_scene_names')
+15-2-3 20:39:59.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.5|Debug|MigrationLogger|17: reset_scene_names migrated
+15-2-3 20:39:59.5|Debug|MigrationLogger|Took: 00:00:00.0076070
+15-2-3 20:39:59.5|Info|MigrationLogger|*** 18: remove_duplicates migrating ***
+15-2-3 20:39:59.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.5|Info|remove_duplicates|Starting migration to 18
+15-2-3 20:39:59.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (18, '2015-02-04T02:39:59', 'remove_duplicates')
+15-2-3 20:39:59.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.5|Debug|MigrationLogger|18: remove_duplicates migrated
+15-2-3 20:39:59.5|Debug|MigrationLogger|Took: 00:00:00.0114230
+15-2-3 20:39:59.5|Info|MigrationLogger|*** 19: restore_unique_constraints migrating ***
+15-2-3 20:39:59.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.5|Info|restore_unique_constraints|Starting migration to 19
+15-2-3 20:39:59.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (19, '2015-02-04T02:39:59', 'restore_unique_constraints')
+15-2-3 20:39:59.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.5|Debug|MigrationLogger|19: restore_unique_constraints migrated
+15-2-3 20:39:59.5|Debug|MigrationLogger|Took: 00:00:00.0130050
+15-2-3 20:39:59.5|Info|MigrationLogger|*** 20: add_year_and_seasons_to_series migrating ***
+15-2-3 20:39:59.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.5|Info|add_year_and_seasons_to_series|Starting migration to 20
+15-2-3 20:39:59.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (20, '2015-02-04T02:39:59', 'add_year_and_seasons_to_series')
+15-2-3 20:39:59.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.5|Debug|MigrationLogger|20: add_year_and_seasons_to_series migrated
+15-2-3 20:39:59.5|Debug|MigrationLogger|Took: 00:00:00.0164260
+15-2-3 20:39:59.5|Info|MigrationLogger|*** 21: drop_seasons_table migrating ***
+15-2-3 20:39:59.5|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.5|Info|drop_seasons_table|Starting migration to 21
+15-2-3 20:39:59.5|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (21, '2015-02-04T02:39:59', 'drop_seasons_table')
+15-2-3 20:39:59.5|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.6|Debug|MigrationLogger|21: drop_seasons_table migrated
+15-2-3 20:39:59.6|Debug|MigrationLogger|Took: 00:00:00.0131440
+15-2-3 20:39:59.6|Info|MigrationLogger|*** 22: move_indexer_to_generic_provider migrating ***
+15-2-3 20:39:59.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.6|Info|move_indexer_to_generic_provider|Starting migration to 22
+15-2-3 20:39:59.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (22, '2015-02-04T02:39:59', 'move_indexer_to_generic_provider')
+15-2-3 20:39:59.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.6|Debug|MigrationLogger|22: move_indexer_to_generic_provider migrated
+15-2-3 20:39:59.6|Debug|MigrationLogger|Took: 00:00:00.0140580
+15-2-3 20:39:59.6|Info|MigrationLogger|*** 23: add_config_contract_to_indexers migrating ***
+15-2-3 20:39:59.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.6|Info|add_config_contract_to_indexers|Starting migration to 23
+15-2-3 20:39:59.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (23, '2015-02-04T02:39:59', 'add_config_contract_to_indexers')
+15-2-3 20:39:59.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.6|Debug|MigrationLogger|23: add_config_contract_to_indexers migrated
+15-2-3 20:39:59.6|Debug|MigrationLogger|Took: 00:00:00.0099770
+15-2-3 20:39:59.6|Info|MigrationLogger|*** 24: drop_tvdb_episodeid migrating ***
+15-2-3 20:39:59.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.6|Info|drop_tvdb_episodeid|Starting migration to 24
+15-2-3 20:39:59.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (24, '2015-02-04T02:39:59', 'drop_tvdb_episodeid')
+15-2-3 20:39:59.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.6|Debug|MigrationLogger|24: drop_tvdb_episodeid migrated
+15-2-3 20:39:59.6|Debug|MigrationLogger|Took: 00:00:00.0097880
+15-2-3 20:39:59.6|Info|MigrationLogger|*** 25: move_notification_to_generic_provider migrating ***
+15-2-3 20:39:59.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.6|Info|move_notification_to_generic_provider|Starting migration to 25
+15-2-3 20:39:59.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (25, '2015-02-04T02:39:59', 'move_notification_to_generic_provider')
+15-2-3 20:39:59.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.6|Debug|MigrationLogger|25: move_notification_to_generic_provider migrated
+15-2-3 20:39:59.6|Debug|MigrationLogger|Took: 00:00:00.0131950
+15-2-3 20:39:59.6|Info|MigrationLogger|*** 26: add_config_contract_to_notifications migrating ***
+15-2-3 20:39:59.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.6|Info|add_config_contract_to_notifications|Starting migration to 26
+15-2-3 20:39:59.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (26, '2015-02-04T02:39:59', 'add_config_contract_to_notifications')
+15-2-3 20:39:59.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.6|Debug|MigrationLogger|26: add_config_contract_to_notifications migrated
+15-2-3 20:39:59.6|Debug|MigrationLogger|Took: 00:00:00.0141440
+15-2-3 20:39:59.6|Info|MigrationLogger|*** 27: fix_omgwtfnzbs migrating ***
+15-2-3 20:39:59.6|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.6|Info|fix_omgwtfnzbs|Starting migration to 27
+15-2-3 20:39:59.6|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (27, '2015-02-04T02:39:59', 'fix_omgwtfnzbs')
+15-2-3 20:39:59.6|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.7|Debug|MigrationLogger|27: fix_omgwtfnzbs migrated
+15-2-3 20:39:59.7|Debug|MigrationLogger|Took: 00:00:00.0152710
+15-2-3 20:39:59.7|Info|MigrationLogger|*** 28: add_blacklist_table migrating ***
+15-2-3 20:39:59.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.7|Info|add_blacklist_table|Starting migration to 28
+15-2-3 20:39:59.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (28, '2015-02-04T02:39:59', 'add_blacklist_table')
+15-2-3 20:39:59.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.7|Debug|MigrationLogger|28: add_blacklist_table migrated
+15-2-3 20:39:59.7|Debug|MigrationLogger|Took: 00:00:00.0140510
+15-2-3 20:39:59.7|Info|MigrationLogger|*** 29: add_formats_to_naming_config migrating ***
+15-2-3 20:39:59.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.7|Info|add_formats_to_naming_config|Starting migration to 29
+15-2-3 20:39:59.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (29, '2015-02-04T02:39:59', 'add_formats_to_naming_config')
+15-2-3 20:39:59.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.7|Debug|MigrationLogger|29: add_formats_to_naming_config migrated
+15-2-3 20:39:59.7|Debug|MigrationLogger|Took: 00:00:00.0100470
+15-2-3 20:39:59.7|Info|MigrationLogger|*** 30: add_season_folder_format_to_naming_config migrating ***
+15-2-3 20:39:59.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.7|Info|add_season_folder_format_to_naming_config|Starting migration to 30
+15-2-3 20:39:59.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (30, '2015-02-04T02:39:59', 'add_season_folder_format_to_naming_config')
+15-2-3 20:39:59.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.7|Debug|MigrationLogger|30: add_season_folder_format_to_naming_config migrated
+15-2-3 20:39:59.7|Debug|MigrationLogger|Took: 00:00:00.0096060
+15-2-3 20:39:59.7|Info|MigrationLogger|*** 31: delete_old_naming_config_columns migrating ***
+15-2-3 20:39:59.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.7|Info|delete_old_naming_config_columns|Starting migration to 31
+15-2-3 20:39:59.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (31, '2015-02-04T02:39:59', 'delete_old_naming_config_columns')
+15-2-3 20:39:59.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.7|Debug|MigrationLogger|31: delete_old_naming_config_columns migrated
+15-2-3 20:39:59.7|Debug|MigrationLogger|Took: 00:00:00.0132930
+15-2-3 20:39:59.7|Info|MigrationLogger|*** 32: set_default_release_group migrating ***
+15-2-3 20:39:59.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.7|Info|set_default_release_group|Starting migration to 32
+15-2-3 20:39:59.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (32, '2015-02-04T02:39:59', 'set_default_release_group')
+15-2-3 20:39:59.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.7|Debug|MigrationLogger|32: set_default_release_group migrated
+15-2-3 20:39:59.7|Debug|MigrationLogger|Took: 00:00:00.0140040
+15-2-3 20:39:59.7|Info|MigrationLogger|*** 33: add_api_key_to_pushover migrating ***
+15-2-3 20:39:59.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.7|Info|add_api_key_to_pushover|Starting migration to 33
+15-2-3 20:39:59.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (33, '2015-02-04T02:39:59', 'add_api_key_to_pushover')
+15-2-3 20:39:59.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.7|Debug|MigrationLogger|33: add_api_key_to_pushover migrated
+15-2-3 20:39:59.7|Debug|MigrationLogger|Took: 00:00:00.0099240
+15-2-3 20:39:59.7|Info|MigrationLogger|*** 34: remove_series_contraints migrating ***
+15-2-3 20:39:59.7|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.7|Info|remove_series_contraints|Starting migration to 34
+15-2-3 20:39:59.7|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (34, '2015-02-04T02:39:59', 'remove_series_contraints')
+15-2-3 20:39:59.7|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.8|Debug|MigrationLogger|34: remove_series_contraints migrated
+15-2-3 20:39:59.8|Debug|MigrationLogger|Took: 00:00:00.0097840
+15-2-3 20:39:59.8|Info|MigrationLogger|*** 35: add_series_folder_format_to_naming_config migrating ***
+15-2-3 20:39:59.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.8|Info|add_series_folder_format_to_naming_config|Starting migration to 35
+15-2-3 20:39:59.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (35, '2015-02-04T02:39:59', 'add_series_folder_format_to_naming_config')
+15-2-3 20:39:59.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.8|Debug|MigrationLogger|35: add_series_folder_format_to_naming_config migrated
+15-2-3 20:39:59.8|Debug|MigrationLogger|Took: 00:00:00.0131890
+15-2-3 20:39:59.8|Info|MigrationLogger|*** 36: update_with_quality_converters migrating ***
+15-2-3 20:39:59.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.8|Info|update_with_quality_converters|Starting migration to 36
+15-2-3 20:39:59.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (36, '2015-02-04T02:39:59', 'update_with_quality_converters')
+15-2-3 20:39:59.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.8|Debug|MigrationLogger|36: update_with_quality_converters migrated
+15-2-3 20:39:59.8|Debug|MigrationLogger|Took: 00:00:00.0139490
+15-2-3 20:39:59.8|Info|MigrationLogger|*** 37: add_configurable_qualities migrating ***
+15-2-3 20:39:59.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.8|Info|add_configurable_qualities|Starting migration to 37
+15-2-3 20:39:59.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (37, '2015-02-04T02:39:59', 'add_configurable_qualities')
+15-2-3 20:39:59.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.8|Debug|MigrationLogger|37: add_configurable_qualities migrated
+15-2-3 20:39:59.8|Debug|MigrationLogger|Took: 00:00:00.0099700
+15-2-3 20:39:59.8|Info|MigrationLogger|*** 38: add_on_upgrade_to_notifications migrating ***
+15-2-3 20:39:59.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.8|Info|add_on_upgrade_to_notifications|Starting migration to 38
+15-2-3 20:39:59.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (38, '2015-02-04T02:39:59', 'add_on_upgrade_to_notifications')
+15-2-3 20:39:59.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.8|Debug|MigrationLogger|38: add_on_upgrade_to_notifications migrated
+15-2-3 20:39:59.8|Debug|MigrationLogger|Took: 00:00:00.0153630
+15-2-3 20:39:59.8|Info|MigrationLogger|*** 39: add_metadata_tables migrating ***
+15-2-3 20:39:59.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.8|Info|add_metadata_tables|Starting migration to 39
+15-2-3 20:39:59.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (39, '2015-02-04T02:39:59', 'add_metadata_tables')
+15-2-3 20:39:59.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.8|Debug|MigrationLogger|39: add_metadata_tables migrated
+15-2-3 20:39:59.8|Debug|MigrationLogger|Took: 00:00:00.0141490
+15-2-3 20:39:59.8|Info|MigrationLogger|*** 40: add_metadata_to_episodes_and_series migrating ***
+15-2-3 20:39:59.8|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.8|Info|add_metadata_to_episodes_and_series|Starting migration to 40
+15-2-3 20:39:59.8|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (40, '2015-02-04T02:39:59', 'add_metadata_to_episodes_and_series')
+15-2-3 20:39:59.8|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.9|Debug|MigrationLogger|40: add_metadata_to_episodes_and_series migrated
+15-2-3 20:39:59.9|Debug|MigrationLogger|Took: 00:00:00.0127280
+15-2-3 20:39:59.9|Info|MigrationLogger|*** 41: fix_xbmc_season_images_metadata migrating ***
+15-2-3 20:39:59.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.9|Info|fix_xbmc_season_images_metadata|Starting migration to 41
+15-2-3 20:39:59.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (41, '2015-02-04T02:39:59', 'fix_xbmc_season_images_metadata')
+15-2-3 20:39:59.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.9|Debug|MigrationLogger|41: fix_xbmc_season_images_metadata migrated
+15-2-3 20:39:59.9|Debug|MigrationLogger|Took: 00:00:00.0106140
+15-2-3 20:39:59.9|Info|MigrationLogger|*** 42: add_download_clients_table migrating ***
+15-2-3 20:39:59.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.9|Info|add_download_clients_table|Starting migration to 42
+15-2-3 20:39:59.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (42, '2015-02-04T02:39:59', 'add_download_clients_table')
+15-2-3 20:39:59.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.9|Debug|MigrationLogger|42: add_download_clients_table migrated
+15-2-3 20:39:59.9|Debug|MigrationLogger|Took: 00:00:00.0106360
+15-2-3 20:39:59.9|Info|MigrationLogger|*** 43: convert_config_to_download_clients migrating ***
+15-2-3 20:39:59.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.9|Info|convert_config_to_download_clients|Starting migration to 43
+15-2-3 20:39:59.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (43, '2015-02-04T02:39:59', 'convert_config_to_download_clients')
+15-2-3 20:39:59.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.9|Debug|MigrationLogger|43: convert_config_to_download_clients migrated
+15-2-3 20:39:59.9|Debug|MigrationLogger|Took: 00:00:00.0146700
+15-2-3 20:39:59.9|Info|MigrationLogger|*** 44: fix_xbmc_episode_metadata migrating ***
+15-2-3 20:39:59.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.9|Info|fix_xbmc_episode_metadata|Starting migration to 44
+15-2-3 20:39:59.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (44, '2015-02-04T02:39:59', 'fix_xbmc_episode_metadata')
+15-2-3 20:39:59.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.9|Debug|MigrationLogger|44: fix_xbmc_episode_metadata migrated
+15-2-3 20:39:59.9|Debug|MigrationLogger|Took: 00:00:00.0147650
+15-2-3 20:39:59.9|Info|MigrationLogger|*** 45: add_indexes migrating ***
+15-2-3 20:39:59.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.9|Info|add_indexes|Starting migration to 45
+15-2-3 20:39:59.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (45, '2015-02-04T02:39:59', 'add_indexes')
+15-2-3 20:39:59.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:39:59.9|Debug|MigrationLogger|45: add_indexes migrated
+15-2-3 20:39:59.9|Debug|MigrationLogger|Took: 00:00:00.0110160
+15-2-3 20:39:59.9|Info|MigrationLogger|*** 46: fix_nzb_su_url migrating ***
+15-2-3 20:39:59.9|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:39:59.9|Info|fix_nzb_su_url|Starting migration to 46
+15-2-3 20:39:59.9|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (46, '2015-02-04T02:39:59', 'fix_nzb_su_url')
+15-2-3 20:39:59.9|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.0|Debug|MigrationLogger|46: fix_nzb_su_url migrated
+15-2-3 20:40:00.0|Debug|MigrationLogger|Took: 00:00:00.0146730
+15-2-3 20:40:00.0|Info|MigrationLogger|*** 47: add_temporary_blacklist_columns migrating ***
+15-2-3 20:40:00.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.0|Info|add_temporary_blacklist_columns|Starting migration to 47
+15-2-3 20:40:00.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (47, '2015-02-04T02:40:00', 'add_temporary_blacklist_columns')
+15-2-3 20:40:00.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.0|Debug|MigrationLogger|47: add_temporary_blacklist_columns migrated
+15-2-3 20:40:00.0|Debug|MigrationLogger|Took: 00:00:00.0148370
+15-2-3 20:40:00.0|Info|MigrationLogger|*** 48: add_title_to_scenemappings migrating ***
+15-2-3 20:40:00.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.0|Info|add_title_to_scenemappings|Starting migration to 48
+15-2-3 20:40:00.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (48, '2015-02-04T02:40:00', 'add_title_to_scenemappings')
+15-2-3 20:40:00.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.0|Debug|MigrationLogger|48: add_title_to_scenemappings migrated
+15-2-3 20:40:00.0|Debug|MigrationLogger|Took: 00:00:00.0147380
+15-2-3 20:40:00.0|Info|MigrationLogger|*** 49: fix_dognzb_url migrating ***
+15-2-3 20:40:00.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.0|Info|fix_dognzb_url|Starting migration to 49
+15-2-3 20:40:00.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (49, '2015-02-04T02:40:00', 'fix_dognzb_url')
+15-2-3 20:40:00.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.0|Debug|MigrationLogger|49: fix_dognzb_url migrated
+15-2-3 20:40:00.0|Debug|MigrationLogger|Took: 00:00:00.0148870
+15-2-3 20:40:00.0|Info|MigrationLogger|*** 50: add_hash_to_metadata_files migrating ***
+15-2-3 20:40:00.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.0|Info|add_hash_to_metadata_files|Starting migration to 50
+15-2-3 20:40:00.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (50, '2015-02-04T02:40:00', 'add_hash_to_metadata_files')
+15-2-3 20:40:00.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.0|Debug|MigrationLogger|50: add_hash_to_metadata_files migrated
+15-2-3 20:40:00.0|Debug|MigrationLogger|Took: 00:00:00.0147000
+15-2-3 20:40:00.0|Info|MigrationLogger|*** 51: download_client_import migrating ***
+15-2-3 20:40:00.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.0|Info|download_client_import|Starting migration to 51
+15-2-3 20:40:00.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (51, '2015-02-04T02:40:00', 'download_client_import')
+15-2-3 20:40:00.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.0|Debug|MigrationLogger|51: download_client_import migrated
+15-2-3 20:40:00.0|Debug|MigrationLogger|Took: 00:00:00.0147460
+15-2-3 20:40:00.0|Info|MigrationLogger|*** 52: add_columns_for_anime migrating ***
+15-2-3 20:40:00.0|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.0|Info|add_columns_for_anime|Starting migration to 52
+15-2-3 20:40:00.0|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (52, '2015-02-04T02:40:00', 'add_columns_for_anime')
+15-2-3 20:40:00.0|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.1|Debug|MigrationLogger|52: add_columns_for_anime migrated
+15-2-3 20:40:00.1|Debug|MigrationLogger|Took: 00:00:00.0139020
+15-2-3 20:40:00.1|Info|MigrationLogger|*** 53: add_series_sorttitle migrating ***
+15-2-3 20:40:00.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.1|Info|add_series_sorttitle|Starting migration to 53
+15-2-3 20:40:00.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (53, '2015-02-04T02:40:00', 'add_series_sorttitle')
+15-2-3 20:40:00.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.1|Debug|MigrationLogger|53: add_series_sorttitle migrated
+15-2-3 20:40:00.1|Debug|MigrationLogger|Took: 00:00:00.0097430
+15-2-3 20:40:00.1|Info|MigrationLogger|*** 54: rename_profiles migrating ***
+15-2-3 20:40:00.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.1|Info|rename_profiles|Starting migration to 54
+15-2-3 20:40:00.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (54, '2015-02-04T02:40:00', 'rename_profiles')
+15-2-3 20:40:00.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.1|Debug|MigrationLogger|54: rename_profiles migrated
+15-2-3 20:40:00.1|Debug|MigrationLogger|Took: 00:00:00.0113570
+15-2-3 20:40:00.1|Info|MigrationLogger|*** 55: drop_old_profile_columns migrating ***
+15-2-3 20:40:00.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.1|Info|drop_old_profile_columns|Starting migration to 55
+15-2-3 20:40:00.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (55, '2015-02-04T02:40:00', 'drop_old_profile_columns')
+15-2-3 20:40:00.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.1|Debug|MigrationLogger|55: drop_old_profile_columns migrated
+15-2-3 20:40:00.1|Debug|MigrationLogger|Took: 00:00:00.0115720
+15-2-3 20:40:00.1|Info|MigrationLogger|*** 56: add_mediainfo_to_episodefile migrating ***
+15-2-3 20:40:00.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.1|Info|add_mediainfo_to_episodefile|Starting migration to 56
+15-2-3 20:40:00.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (56, '2015-02-04T02:40:00', 'add_mediainfo_to_episodefile')
+15-2-3 20:40:00.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.1|Debug|MigrationLogger|56: add_mediainfo_to_episodefile migrated
+15-2-3 20:40:00.1|Debug|MigrationLogger|Took: 00:00:00.0152170
+15-2-3 20:40:00.1|Info|MigrationLogger|*** 57: convert_episode_file_path_to_relative migrating ***
+15-2-3 20:40:00.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.1|Info|convert_episode_file_path_to_relative|Starting migration to 57
+15-2-3 20:40:00.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (57, '2015-02-04T02:40:00', 'convert_episode_file_path_to_relative')
+15-2-3 20:40:00.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.1|Debug|MigrationLogger|57: convert_episode_file_path_to_relative migrated
+15-2-3 20:40:00.1|Debug|MigrationLogger|Took: 00:00:00.0142410
+15-2-3 20:40:00.1|Info|MigrationLogger|*** 58: drop_episode_file_path migrating ***
+15-2-3 20:40:00.1|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.1|Info|drop_episode_file_path|Starting migration to 58
+15-2-3 20:40:00.1|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (58, '2015-02-04T02:40:00', 'drop_episode_file_path')
+15-2-3 20:40:00.1|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.2|Debug|MigrationLogger|58: drop_episode_file_path migrated
+15-2-3 20:40:00.2|Debug|MigrationLogger|Took: 00:00:00.0143160
+15-2-3 20:40:00.2|Info|MigrationLogger|*** 59: add_enable_options_to_indexers migrating ***
+15-2-3 20:40:00.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.2|Info|add_enable_options_to_indexers|Starting migration to 59
+15-2-3 20:40:00.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (59, '2015-02-04T02:40:00', 'add_enable_options_to_indexers')
+15-2-3 20:40:00.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.2|Debug|MigrationLogger|59: add_enable_options_to_indexers migrated
+15-2-3 20:40:00.2|Debug|MigrationLogger|Took: 00:00:00.0122090
+15-2-3 20:40:00.2|Info|MigrationLogger|*** 60: remove_enable_from_indexers migrating ***
+15-2-3 20:40:00.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.2|Info|remove_enable_from_indexers|Starting migration to 60
+15-2-3 20:40:00.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (60, '2015-02-04T02:40:00', 'remove_enable_from_indexers')
+15-2-3 20:40:00.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.2|Debug|MigrationLogger|60: remove_enable_from_indexers migrated
+15-2-3 20:40:00.2|Debug|MigrationLogger|Took: 00:00:00.0116320
+15-2-3 20:40:00.2|Info|MigrationLogger|*** 61: clear_bad_scene_names migrating ***
+15-2-3 20:40:00.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.2|Info|clear_bad_scene_names|Starting migration to 61
+15-2-3 20:40:00.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (61, '2015-02-04T02:40:00', 'clear_bad_scene_names')
+15-2-3 20:40:00.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.2|Debug|MigrationLogger|61: clear_bad_scene_names migrated
+15-2-3 20:40:00.2|Debug|MigrationLogger|Took: 00:00:00.0142980
+15-2-3 20:40:00.2|Info|MigrationLogger|*** 62: convert_quality_models migrating ***
+15-2-3 20:40:00.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.2|Info|convert_quality_models|Starting migration to 62
+15-2-3 20:40:00.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (62, '2015-02-04T02:40:00', 'convert_quality_models')
+15-2-3 20:40:00.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.2|Debug|MigrationLogger|62: convert_quality_models migrated
+15-2-3 20:40:00.2|Debug|MigrationLogger|Took: 00:00:00.0153070
+15-2-3 20:40:00.2|Info|MigrationLogger|*** 63: add_remotepathmappings migrating ***
+15-2-3 20:40:00.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.2|Info|add_remotepathmappings|Starting migration to 63
+15-2-3 20:40:00.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (63, '2015-02-04T02:40:00', 'add_remotepathmappings')
+15-2-3 20:40:00.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.2|Debug|MigrationLogger|63: add_remotepathmappings migrated
+15-2-3 20:40:00.2|Debug|MigrationLogger|Took: 00:00:00.0141540
+15-2-3 20:40:00.2|Info|MigrationLogger|*** 64: remove_method_from_logs migrating ***
+15-2-3 20:40:00.2|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.2|Info|remove_method_from_logs|Starting migration to 64
+15-2-3 20:40:00.2|Debug|MigrationLogger|DeleteColumn Logs Method
+15-2-3 20:40:00.2|Debug|MigrationLogger|CREATE TABLE "Logs_temp" ("Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "Message" TEXT NOT NULL, "Time" DATETIME NOT NULL, "Logger" TEXT NOT NULL, "Exception" TEXT, "ExceptionType" TEXT, "Level" TEXT NOT NULL)
+15-2-3 20:40:00.2|Debug|MigrationLogger|INSERT INTO "Logs_temp" SELECT "Id", "Message", "Time", "Logger", "Exception", "ExceptionType", "Level" FROM "Logs"
+15-2-3 20:40:00.2|Debug|MigrationLogger|DROP TABLE "Logs"
+15-2-3 20:40:00.2|Debug|MigrationLogger|ALTER TABLE "Logs_temp" RENAME TO "Logs"
+15-2-3 20:40:00.2|Debug|MigrationLogger|CREATE INDEX "IX_Logs_Time" ON "Logs" ("Time" ASC)
+15-2-3 20:40:00.2|Debug|MigrationLogger|Took: 00:00:00.0046310
+15-2-3 20:40:00.2|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (64, '2015-02-04T02:40:00', 'remove_method_from_logs')
+15-2-3 20:40:00.2|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.3|Debug|MigrationLogger|64: remove_method_from_logs migrated
+15-2-3 20:40:00.3|Debug|MigrationLogger|Took: 00:00:00.0195380
+15-2-3 20:40:00.3|Info|MigrationLogger|*** 65: make_scene_numbering_nullable migrating ***
+15-2-3 20:40:00.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.3|Info|make_scene_numbering_nullable|Starting migration to 65
+15-2-3 20:40:00.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (65, '2015-02-04T02:40:00', 'make_scene_numbering_nullable')
+15-2-3 20:40:00.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.3|Debug|MigrationLogger|65: make_scene_numbering_nullable migrated
+15-2-3 20:40:00.3|Debug|MigrationLogger|Took: 00:00:00.0125610
+15-2-3 20:40:00.3|Info|MigrationLogger|*** 66: add_tags migrating ***
+15-2-3 20:40:00.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.3|Info|add_tags|Starting migration to 66
+15-2-3 20:40:00.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (66, '2015-02-04T02:40:00', 'add_tags')
+15-2-3 20:40:00.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.3|Debug|MigrationLogger|66: add_tags migrated
+15-2-3 20:40:00.3|Debug|MigrationLogger|Took: 00:00:00.0117100
+15-2-3 20:40:00.3|Info|MigrationLogger|*** 67: add_added_to_series migrating ***
+15-2-3 20:40:00.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.3|Info|add_added_to_series|Starting migration to 67
+15-2-3 20:40:00.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (67, '2015-02-04T02:40:00', 'add_added_to_series')
+15-2-3 20:40:00.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.3|Debug|MigrationLogger|67: add_added_to_series migrated
+15-2-3 20:40:00.3|Debug|MigrationLogger|Took: 00:00:00.0129190
+15-2-3 20:40:00.3|Info|MigrationLogger|*** 68: add_release_restrictions migrating ***
+15-2-3 20:40:00.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.3|Info|add_release_restrictions|Starting migration to 68
+15-2-3 20:40:00.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (68, '2015-02-04T02:40:00', 'add_release_restrictions')
+15-2-3 20:40:00.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.3|Debug|MigrationLogger|68: add_release_restrictions migrated
+15-2-3 20:40:00.3|Debug|MigrationLogger|Took: 00:00:00.0151540
+15-2-3 20:40:00.3|Info|MigrationLogger|*** 69: quality_proper migrating ***
+15-2-3 20:40:00.3|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.3|Info|quality_proper|Starting migration to 69
+15-2-3 20:40:00.3|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (69, '2015-02-04T02:40:00', 'quality_proper')
+15-2-3 20:40:00.3|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.3|Debug|MigrationLogger|69: quality_proper migrated
+15-2-3 20:40:00.3|Debug|MigrationLogger|Took: 00:00:00.0143690
+15-2-3 20:40:00.4|Info|MigrationLogger|*** 70: delay_profile migrating ***
+15-2-3 20:40:00.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.4|Info|delay_profile|Starting migration to 70
+15-2-3 20:40:00.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (70, '2015-02-04T02:40:00', 'delay_profile')
+15-2-3 20:40:00.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.4|Debug|MigrationLogger|70: delay_profile migrated
+15-2-3 20:40:00.4|Debug|MigrationLogger|Took: 00:00:00.0150810
+15-2-3 20:40:00.4|Info|MigrationLogger|*** 71: unknown_quality_in_profile migrating ***
+15-2-3 20:40:00.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.4|Info|unknown_quality_in_profile|Starting migration to 71
+15-2-3 20:40:00.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (71, '2015-02-04T02:40:00', 'unknown_quality_in_profile')
+15-2-3 20:40:00.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.4|Debug|MigrationLogger|71: unknown_quality_in_profile migrated
+15-2-3 20:40:00.4|Debug|MigrationLogger|Took: 00:00:00.0143960
+15-2-3 20:40:00.4|Info|MigrationLogger|*** 72: history_downloadId migrating ***
+15-2-3 20:40:00.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.4|Info|history_downloadId|Starting migration to 72
+15-2-3 20:40:00.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (72, '2015-02-04T02:40:00', 'history_downloadId')
+15-2-3 20:40:00.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.4|Debug|MigrationLogger|72: history_downloadId migrated
+15-2-3 20:40:00.4|Debug|MigrationLogger|Took: 00:00:00.0152090
+15-2-3 20:40:00.4|Info|MigrationLogger|*** 73: clear_ratings migrating ***
+15-2-3 20:40:00.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.4|Info|clear_ratings|Starting migration to 73
+15-2-3 20:40:00.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (73, '2015-02-04T02:40:00', 'clear_ratings')
+15-2-3 20:40:00.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.4|Debug|MigrationLogger|73: clear_ratings migrated
+15-2-3 20:40:00.4|Debug|MigrationLogger|Took: 00:00:00.0144900
+15-2-3 20:40:00.4|Info|MigrationLogger|*** 74: disable_eztv migrating ***
+15-2-3 20:40:00.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.4|Info|disable_eztv|Starting migration to 74
+15-2-3 20:40:00.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (74, '2015-02-04T02:40:00', 'disable_eztv')
+15-2-3 20:40:00.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.4|Debug|MigrationLogger|74: disable_eztv migrated
+15-2-3 20:40:00.4|Debug|MigrationLogger|Took: 00:00:00.0104570
+15-2-3 20:40:00.4|Info|MigrationLogger|*** 75: force_lib_update migrating ***
+15-2-3 20:40:00.4|Debug|MigrationLogger|Beginning Transaction
+15-2-3 20:40:00.4|Info|force_lib_update|Starting migration to 75
+15-2-3 20:40:00.4|Debug|MigrationLogger|INSERT INTO "VersionInfo" ("Version", "AppliedOn", "Description") VALUES (75, '2015-02-04T02:40:00', 'force_lib_update')
+15-2-3 20:40:00.4|Debug|MigrationLogger|Committing Transaction
+15-2-3 20:40:00.5|Debug|MigrationLogger|75: force_lib_update migrated
+15-2-3 20:40:00.5|Debug|MigrationLogger|Took: 00:00:00.0144340
+15-2-3 20:40:00.5|Debug|MigrationLogger|Took: 00:00:01.3391550
+15-2-3 20:40:00.5|Info|Router|Application mode: Interactive
+15-2-3 20:40:00.5|Debug|Router|Console selected
+15-2-3 20:40:00.5|Info|OwinHostController|Listening on the following URLs:
+15-2-3 20:40:00.5|Info|OwinHostController|  http://*:8989/
+15-2-3 20:40:00.7|Debug|OwinAppFactory|Attaching NzbDroneVersionMiddleWare to host
+15-2-3 20:40:00.7|Debug|OwinAppFactory|Attaching SignalRMiddleWare to host
+15-2-3 20:40:00.7|Debug|OwinAppFactory|Attaching NancyMiddleWare to host
+15-2-3 20:40:00.7|Info|NancyBootstrapper|Starting NzbDrone API
+15-2-3 20:40:01.2|Trace|EventAggregator|Publishing ApplicationStartedEvent
+15-2-3 20:40:01.5|Trace|EventAggregator|ApplicationStartedEvent -> DownloadClientFactory
+15-2-3 20:40:01.5|Debug|DownloadClientFactory|Initializing Providers. Count 8
+15-2-3 20:40:01.5|Trace|EventAggregator|ApplicationStartedEvent <- DownloadClientFactory
+15-2-3 20:40:01.5|Trace|EventAggregator|ApplicationStartedEvent -> IndexerFactory
+15-2-3 20:40:01.5|Debug|IndexerFactory|Initializing Providers. Count 11
+15-2-3 20:40:01.5|Trace|EventAggregator|ApplicationStartedEvent <- IndexerFactory
+15-2-3 20:40:01.5|Trace|EventAggregator|ApplicationStartedEvent -> ReconfigureLogging
+15-2-3 20:40:02.5|Info|ProfileService|Setting up default quality profiles
+15-2-3 20:40:03.5|Info|SceneMappingService|Updating Scene mappings
+15-2-3 20:40:04.2|Info|HousekeepingService|Running housecleaning tasks
+15-2-3 20:40:04.5|Info|Database|Vacuuming database
+15-2-3 20:40:04.5|Info|Database|Database Compressed
+15-2-3 20:40:21.1|Warn|GlobalExceptionHandlers|SignalR Heartbeat error.
