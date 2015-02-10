@@ -14,10 +14,6 @@ compinit
 autoload -U colors
 colors
 
-# auto startx
-[[ $TTY == "/dev/tty1" ]] && exec startx
-
-
 case "$TERM" in
 	"dumb")
     PS1="> "
@@ -86,7 +82,7 @@ bindkey '^[[B' history-beginning-search-forward
 
 # aliases
 alias ls='ls --color=auto'
-alias add="sudo yum install"
+alias add="yaourt -S "
 alias emacs="TERM=xterm emacs -nw"
 
 ezcp() {
@@ -100,7 +96,6 @@ export SMLNJ_HOME=/usr/lib32/smlnj
 export GOROOT=$HOME/go
 export CLASSPATH=/opt/jars/*
 export VDPAU_DRIVER="r600"
-export CC="clang"
 export EDITOR="emacsclient"
 export LANG="en_US.UTF-8"
 

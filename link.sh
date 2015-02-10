@@ -1,11 +1,17 @@
 #! /usr/bin/env bash
 
-ln -s ~/dotfiles/.zshrc ~/.zshrc
-ln -s ~/dotfiles/.emacs.d ~/.emacs.d
-ln -s ~/dotfiles/.rtorrent.rc ~/.rtorrent.rc
-ln -s ~/dotfiles/.xmodmap ~/.xmodmap
-ln -s ~/dotfiles/.xinitrc ~/.xinitc
-ln -s ~/dotfiles/.xmonad ~/.xmonad
-ln -s ~/dotfiles/.Xresources ~/.Xresources
-ln -s ~/dotfiles/.Xdefaults ~/.Xdefaults
-ln -s ~/dotfiles/.fonts.conf ~/.fonts.conf
+SCRIPT_HOME=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+function add {
+	ln -sf $SCRIPT_HOME/$1 ~/$1
+}
+
+add .zshrc
+add .emacs.d
+add .rtorrent.rc
+add .xmodmap
+add .xinitrc
+add .xmonad
+add .Xresources
+add .Xdefaults
+add .fonts.conf

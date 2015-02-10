@@ -13,6 +13,6 @@ if [ $? -ne 0 ]; then
 fi
 
 xsetroot -cursor_name left_ptr
-compton -cCfb
+compton -cCfb # --vsync opengl
 feh --bg-scale Desktop/simpledesktops.com.png
-exec xmonad
+exec i3

@@ -6,12 +6,12 @@ Xft.dpi: 102
 Xft.lcdfilter: lcddefault
 Xft.hinting: hintfull
 
-URxvt.font: xft:Inconsolata-8
+URxvt.font: xft:Inconsolata-9
 URxvt.boldFont: xft:Inconsolata:bold
 URxvt.scrollStyle: rxvt
 URxvt.scrollBar: false
 URxvt.cursorBlink: true
-URxvt.letterspace: -2
+URxvt.letterspace: -5
 
 *background: #002b36
 *foreground: #657b83
