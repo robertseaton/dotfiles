@@ -80,11 +80,25 @@ bindkey -e
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
+
+# colored man pages
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+        LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+        LESS_TERMCAP_me=$'\E[0m' \
+        LESS_TERMCAP_se=$'\E[0m' \
+        LESS_TERMCAP_so=$'\E[38;5;246m' \
+        LESS_TERMCAP_ue=$'\E[0m' \
+        LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+        man "$@"
+}
+
 # aliases
 alias ls='ls --color=auto'
 alias add="yaourt -S "
 alias emacs="TERM=xterm emacs -nw"
-
+alias conkeror="GTK2_RC_FILES=~/.gtkrc-2.0.conkeror conkeror"
+alias dmesg="dmesg --color=always"
 ezcp() {
     sudo cp -r $1 $2 & disown
 }
