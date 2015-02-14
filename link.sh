@@ -3,7 +3,7 @@
 SCRIPT_HOME=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 function add {
-	ln -sf $SCRIPT_HOME/$1 ~/$1
+	ln -s $SCRIPT_HOME/$1 ~/$1
 }
 
 add .zshrc
@@ -19,3 +19,4 @@ add .i3
 add .i3status.conf
 add .config
 add .ncmpcpp
+add .conkerorrc
