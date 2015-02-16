@@ -28,7 +28,18 @@ esac
 
 # the best prompt
 # example: [@robb downloads]$
-# export PROMPT="%{$fg_bold[red]%}[@%m %c]$ %{$reset_color%}"
+
+
+
+HOSTNAME=$( hostname )
+
+if [[ $HOSTNAME == 'jupiter' ]]; then
+    export PROMPT="%{$fg_bold[yellow]%}[@%m %c]$ %{$reset_color%}"
+elif [[ $HOSTNAME == 'neptune' ]]; then
+    export PROMPT="%{$fg_bold[blue]%}[@%m %c]$ %{$reset_color%}"
+else
+    export PROMPT="%{$fg_bold[red]%}[@%m %c]$ %{$reset_color%}"
+fi
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -108,6 +119,7 @@ alias add="yaourt -S "
 # alias emacs="TERM=xterm emacs -nw"
 alias conkeror="GTK2_RC_FILES=~/.gtkrc-2.0.conkeror conkeror"
 alias dmesg="dmesg --color=always"
+alias muhsnapshots="sudo zfs list -t snapshot | grep"
 ezcp() {
     sudo cp -r $1 $2 & disown
 }
