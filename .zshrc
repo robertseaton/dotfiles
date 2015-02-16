@@ -30,6 +30,10 @@ esac
 # example: [@robb downloads]$
 # export PROMPT="%{$fg_bold[red]%}[@%m %c]$ %{$reset_color%}"
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export TERM=xterm-256color
+
 # play 1080p porn smoothly
 export LIBVA_DRIVER_NAME=vdpau
 
@@ -77,8 +81,13 @@ bindkey -e
 # matches current input to history items
 # bind to up arrow and down arrow
 # this will change your life and make traffic bearable
+
+bindkey '^[OA' history-beginning-search-backward
+bindkey '^[OB' history-beginning-search-forward
+
+# same but for term running in emacs
 bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning-search-forward
+bindkey '^[[B' history-beginning search-forward
 
 
 # colored man pages
@@ -96,7 +105,7 @@ man() {
 # aliases
 alias ls='ls --color=auto'
 alias add="yaourt -S "
-alias emacs="TERM=xterm emacs -nw"
+# alias emacs="TERM=xterm emacs -nw"
 alias conkeror="GTK2_RC_FILES=~/.gtkrc-2.0.conkeror conkeror"
 alias dmesg="dmesg --color=always"
 ezcp() {
