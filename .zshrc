@@ -98,7 +98,7 @@ bindkey '^[OB' history-beginning-search-forward
 
 # same but for term running in emacs
 bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning search-forward
+bindkey '^[[B' history-beginning-search-forward
 
 
 # colored man pages
