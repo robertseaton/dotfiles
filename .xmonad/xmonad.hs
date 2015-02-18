@@ -1,23 +1,23 @@
 import XMonad
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig
+import XMonad.Util.Loggers
 import XMonad.Util.Run
 import XMonad.Util.Scratchpad
+import XMonad.Util.WorkspaceCompare
 
 import System.IO
 
 import qualified XMonad.StackSet as W
 
-manageHook' = composeAll
+myManageHook = composeAll
    [ resource  =? "emacs"         --> doShift "emacs"
    , className =? "Conkeror"      --> doShift "www"
    , title     =? "rtorrent"      --> doShift "rtorrent"
-   --, isFullscreen                 --> doFullFloat
    , manageDocks
    ] <+> manageScratchpad
 
@@ -57,7 +57,6 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 myTerminal = "xfce4-terminal"
 myXMonadBar = "dzen2 -dock -xs 1 -fn Inconsolata-10 -ta l -bg '" ++ backgroundColor ++ "' -w '840' -h '24'"
 myStatusBar = "conky -c /home/rps/.xmonad/.conky_dzen | dzen2 -dock -fn Inconsolata-10 -x '840' -w '1080' -h '24' -ta 'r' -bg '" ++ backgroundColor ++ "' -y '0'"
-layoutHook' = noBorders $ avoidStruts $ spacing 5 $ layoutHook defaultConfig
 
 main = do
   dzenRightBar <- spawnPipe myStatusBar
@@ -66,13 +65,14 @@ main = do
             { terminal = myTerminal
             , focusFollowsMouse = False
             , modMask = mod4Mask
-            , layoutHook = layoutHook'
-            , manageHook = manageHook' <+> manageHook defaultConfig 
-            , workspaces = ["1:emacs", "2:www", "3:rtorrent", "4:mpd", "5:vmc", "6:win", "7:full"]
+            , layoutHook = smartBorders $ avoidStruts $ spacing 5 $ layoutHook defaultConfig
+            , manageHook = myManageHook <+> manageHook defaultConfig 
+            , workspaces = ["1:emacs", "2:www", "3:rtorrent", "4:mpd", "5:vmc", "6:win"]
             , borderWidth = 1
             , normalBorderColor = "#268bd2"
             , focusedBorderColor = "#859900"
             , logHook = myLogHook dzenLeftBar
+            , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
             }
             `additionalKeysP`
             [ ("M-s", scratchpad)
