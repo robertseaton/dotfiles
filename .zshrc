@@ -14,22 +14,8 @@ compinit
 autoload -U colors
 colors
 
-case "$TERM" in
-	"dumb")
-    PS1="> "
-    ;;
-	xterm*|rxvt*|eterm*|screen*)
-    export PROMPT="%{$fg[blue]%}[@%m %c]$ %{$reset_color%}"
-    ;;
-*)
-    export PROMPT="%{$fg[blue]%}[@%m %c]$ %{$reset_color%}"
-    ;;
-esac
-
 # the best prompt
 # example: [@robb downloads]$
-
-
 
 HOSTNAME=$( hostname )
 
@@ -110,22 +96,28 @@ man() {
         LESS_TERMCAP_so=$'\E[38;5;246m' \
         LESS_TERMCAP_ue=$'\E[0m' \
         LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-        man "$@"
+        man -a "$@"
 }
 
 # aliases
-alias ls='ls --color=auto'
+alias ls="ls --color=auto"
 alias add="yaourt -S "
-# alias emacs="TERM=xterm emacs -nw"
+alias tmux="tmux -2"
 alias conkeror="GTK2_RC_FILES=~/.gtkrc-2.0.conkeror conkeror"
 alias dmesg="dmesg --color=always"
 alias muhsnapshots="sudo zfs list -t snapshot | grep"
+alias la="ls -a"
+alias ..="cd .."
+alias plz="sudo !!"
+alias tmacs="tmux attach -t emacs -d"
+alias zup="source ~/.zshrc"
+alias mkdir='mkdir -pv'
+alias pacman="sudo pacman"
+alias restart="sudo systemctl restart"
+
 ezcp() {
     sudo cp -r $1 $2 & disown
 }
-
-export 
-PATH=/home/rps/sh:/home/rps/bin:/home/rps/.gem/ruby/2.0.0/bin:/home/rps/go/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/bin:~/.cabal/bin:~/.scripts:/usr/lib32/smlnj/bin:/home/rps/.gem/ruby/2.1.0/bin:$PATH
 
 export SMLNJ_HOME=/usr/lib32/smlnj
 export GOROOT=$HOME/go
