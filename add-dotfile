@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+SCRIPT_HOME=~/Dropbox/dotfiles/
+
+touch $SCRIPT_HOME/$1
+echo "add $1" >> $SCRIPT_HOME/link.sh
+sh $SCRIPT_HOME/link.sh
