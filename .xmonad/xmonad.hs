@@ -31,11 +31,12 @@ manageScratchpad = scratchpadManageHook(W.RationalRect l t w h)
 
 
 backgroundColor, textColor, color3, color4, color5 :: [Char]
-backgroundColor = "#073642"
-textColor = "#93a1a1"
-color3 = "#b58900"
-color4 = "#dc322f"
-color5 = "#2aa198"
+backgroundColor = "#181818"
+textColor = "#d8d8d8"
+color5 = "#DC9656"
+color4 = "#A1B56C"
+color3 = "#AB4642"
+
 
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
@@ -58,6 +59,13 @@ myTerminal = "xfce4-terminal"
 myXMonadBar = "dzen2 -dock -xs 1 -fn Inconsolata-10 -ta l -bg '" ++ backgroundColor ++ "' -w '840' -h '24'"
 myStatusBar = "conky -c /home/rps/.xmonad/.conky_dzen | dzen2 -dock -fn Inconsolata-10 -x '840' -w '1080' -h '24' -ta 'r' -bg '" ++ backgroundColor ++ "' -y '0'"
 
+layout' = tall' ||| Full
+  where
+    tall' = Tall nmaster delta ratio
+    nmaster = 1
+    ratio = 0.618034 -- Golden ratio with a + b = 1.
+    delta = 3/100
+
 main = do
   dzenRightBar <- spawnPipe myStatusBar
   dzenLeftBar <- spawnPipe myXMonadBar
@@ -65,12 +73,12 @@ main = do
             { terminal = myTerminal
             , focusFollowsMouse = False
             , modMask = mod4Mask
-            , layoutHook = smartBorders $ avoidStruts $ spacing 5 $ layoutHook defaultConfig
+            , layoutHook = smartBorders $ avoidStruts $ spacing 5 $ layout'
             , manageHook = myManageHook <+> manageHook defaultConfig 
             , workspaces = ["1:emacs", "2:www", "3:rtorrent", "4:mpd", "5:vmc", "6:win"]
             , borderWidth = 1
-            , normalBorderColor = "#268bd2"
-            , focusedBorderColor = "#859900"
+            , normalBorderColor = "#181818"
+            , focusedBorderColor = "#AB4642"
             , logHook = myLogHook dzenLeftBar
             , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
             }
@@ -81,9 +89,9 @@ main = do
             , ("C-d f", windows W.focusDown)         -- Select next window.
             , ("C-d b", windows W.focusUp)           -- Select the previous window.
             , ("C-d <Return>", windows W.swapMaster) -- Swap master window and focused window.
-            , ("C-h", sendMessage Shrink)          -- Shrink the master area.
-            , ("C-l", sendMessage Expand)          -- Grow the master area.
-            , ("C-d k", kill)                        -- Kill the selected window.
+            , ("C-h", sendMessage Shrink)            -- Shrink the master area.
+            , ("C-l", sendMessage Expand)            -- Grow the master area.
+            , ("C-d x", kill)                        -- Kill the selected window.
             , ("C-d c", spawn myTerminal)            -- Start terminal.
 --            , ("C-d  
             ]
