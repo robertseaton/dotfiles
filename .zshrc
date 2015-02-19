@@ -87,6 +87,9 @@ bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
 
+# autojump
+[[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
+
 # colored man pages
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -114,6 +117,7 @@ alias zup="source ~/.zshrc"
 alias mkdir='mkdir -pv'
 alias pacman="sudo pacman"
 alias restart="sudo systemctl restart"
+alias ja="j -a"
 
 ezcp() {
     sudo cp -r $1 $2 & disown
