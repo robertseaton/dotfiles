@@ -24,10 +24,10 @@ font pango: Inconsolata 10
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $up l
-set $down k
-set $left j
-set $right semicolon
+set $up s
+set $down d
+set $left a
+set $right f
 
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
@@ -76,10 +76,10 @@ bindsym Mod4+h split h
 bindsym Mod4+v split v
 
 # enter fullscreen mode for the focused container
-bindsym Mod4+f fullscreen
+bindsym Mod4+l fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym Mod4+s layout stacking
+bindsym Mod4+k layout stacking
 bindsym Mod4+w layout tabbed
 bindsym Mod4+e layout toggle split
 
@@ -90,7 +90,7 @@ bindsym Mod4+Shift+space floating toggle
 bindsym Mod4+space focus mode_toggle
 
 # focus the parent container
-bindsym Mod4+a focus parent
+#bindsym Mod4+a focus parent
 
 # focus the child container
 #bindsym Mod4+d focus child
@@ -105,8 +105,8 @@ bindsym Mod4+minus scratchpad show
 # switch to workspace
 bindsym Mod4+1 workspace 1: emacs
 bindsym Mod4+2 workspace 2: www
-bindsym Mod4+3 workspace 3
-bindsym Mod4+4 workspace 4
+bindsym Mod4+3 workspace 3: civ
+bindsym Mod4+4 workspace 4: rtorrent
 bindsym Mod4+5 workspace 5
 bindsym Mod4+6 workspace 6
 bindsym Mod4+7 workspace 7
@@ -117,8 +117,8 @@ bindsym Mod4+0 workspace 10
 # move focused container to workspace
 bindsym Mod4+Shift+1 move container to workspace 1: emacs
 bindsym Mod4+Shift+2 move container to workspace 2: www
-bindsym Mod4+Shift+3 move container to workspace 3
-bindsym Mod4+Shift+4 move container to workspace 4
+bindsym Mod4+Shift+3 move container to workspace 3: civ
+bindsym Mod4+Shift+4 move container to workspace 4: rtorrent
 bindsym Mod4+Shift+5 move container to workspace 5
 bindsym Mod4+Shift+6 move container to workspace 6
 bindsym Mod4+Shift+7 move container to workspace 7
@@ -166,8 +166,12 @@ bar {
     position top
 }
 
-new_window pixel 1
+new_window pixel 3
 # gap_size 16
 
 gaps inner 15
 #gaps outer 20
+
+# allowing swapping workspaces between monitors -- wtf?
+
+bindsym Mod4+t move workspace to output left
