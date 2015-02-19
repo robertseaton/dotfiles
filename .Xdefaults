@@ -1,17 +1,17 @@
-Xft.autohint: 0
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
-Xft.dpi: 102
-Xft.lcdfilter: lcddefault
-Xft.hinting: hintfull
+!! Enable OSX copy and paste.
+!!URxvt.perl-lib: ~/.urxvt/ext/
+!! *VT100.translations: #override  Meta <KeyPress> V:  insert-selection(PRIMARY, CUT_BUFFER0) \n
+URxvt.perl-ext-common: macosx-clipboard
+URxvt*keysym.M-c: perl:macosx-clipboard:copy
+URxvt*keysym.M-v: perl:macosx-clipboard:paste
 
-URxvt.font: xft:Inconsolata-9
-URxvt.boldFont: xft:Inconsolata:bold
+URxvt.font: xft:Inconsolata:size=10
+URxvt.boldFont: xft:Inconsolata-10:bold
+URxvt.letterSpace: 0
+
 URxvt.scrollStyle: rxvt
 URxvt.scrollBar: false
 URxvt.cursorBlink: true
-URxvt.letterspace: -5
 
 *background: #002b36
 *foreground: #657b83
