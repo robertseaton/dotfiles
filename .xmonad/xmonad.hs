@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -66,6 +67,8 @@ layout' = tall' ||| Full
     ratio = 0.618034 -- Golden ratio with a + b = 1.
     delta = 3/100
 
+dmenu_cmd = "dmenu_run -h 24 -fn Inconsolata-10 -nb '" ++ backgroundColor ++ "' -nf '" ++ textColor ++ "' -sb '" ++ color3 ++ "' -sf '" ++ textColor ++ "'"
+
 main = do
   dzenRightBar <- spawnPipe myStatusBar
   dzenLeftBar <- spawnPipe myXMonadBar
@@ -75,25 +78,33 @@ main = do
             , modMask = mod4Mask
             , layoutHook = smartBorders $ avoidStruts $ spacing 5 $ layout'
             , manageHook = myManageHook <+> manageHook defaultConfig 
-            , workspaces = ["1:emacs", "2:www", "3:rtorrent", "4:mpd", "5:vmc", "6:win"]
+            , workspaces = ["1:emacs", "2:www", "3:misc", "4:vmc", "5:win"]
             , borderWidth = 1
-            , normalBorderColor = "#181818"
-            , focusedBorderColor = "#AB4642"
+            , normalBorderColor = backgroundColor
+            , focusedBorderColor = color3
             , logHook = myLogHook dzenLeftBar
             , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
             }
+            `additionalMouseBindings`
+            [ ((0, 8), \w -> prevWS ) -- Use mouse button to move to the previous workspace.
+            , ((0, 9), \w -> nextWS ) -- Use mouse button to move to the next workspace.
+            ]
             `additionalKeysP`
             [ ("M-s", scratchpad)
             , ("C-d q", spawn "killall conky dzen2 && xmonad --recompile && xmonad --restart")
-	    , ("C-d p", spawn "dmenu_run")
-            , ("C-d f", windows W.focusDown)         -- Select next window.
-            , ("C-d b", windows W.focusUp)           -- Select the previous window.
-            , ("C-d <Return>", windows W.swapMaster) -- Swap master window and focused window.
-            , ("C-h", sendMessage Shrink)            -- Shrink the master area.
-            , ("C-l", sendMessage Expand)            -- Grow the master area.
-            , ("C-d x", kill)                        -- Kill the selected window.
-            , ("C-d c", spawn myTerminal)            -- Start terminal.
---            , ("C-d  
+	    , ("C-d s", spawn dmenu_cmd)
+            , ("C-d f", windows W.focusDown)           -- Select next window.
+            , ("C-d d", windows W.focusUp)             -- Select the previous window.
+            , ("C-d <Return>", windows W.swapMaster)   -- Swap master window and focused window.
+            , ("C-h", sendMessage Shrink)              -- Shrink the master area.
+            , ("C-l", sendMessage Expand)              -- Grow the master area.
+            , ("C-d x", kill)                          -- Kill the selected window.
+            , ("C-d c", spawn myTerminal)              -- Start terminal.
+            , ("C-d <Space>", sendMessage NextLayout)  -- Switch layout.
+            , ("C-d n", windows W.swapDown)            -- Swap focused window with next window.
+            , ("C-d p", windows W.swapUp)              -- Swap focused window with the previous window.
+            , ("C-d +", sendMessage (IncMasterN 1))    -- Increment the number of windows in the master area.
+            , ("C-d -", sendMessage (IncMasterN (-1))) -- Decrement the number of windows in the master area. 
             ]
             where
                 scratchpad = scratchpadSpawnActionTerminal myTerminal
