@@ -5,6 +5,4 @@ out_to_x no
 update_interval 1
 
 TEXT
-#^i(/home/rps/.xmonad/bitmaps/cpu.xbm) ^fg(\#FFFFFF)${cpu}% ^i(/home/rps/.xmonad/bitmaps/mem.xbm) ^fg(\#FFFFFF)${memperc}% ^fg(\#ebac54) ${if_existing /proc/net/route enp8s0} ^i(/home/rps/.xmonad/bitmaps/net_wired.xbm) ^fg(\#00aa4a) #^i(/home/rps/.xmonad/bitmaps/net_down_03.xbm)${downspeed enp8s0} ^fg(\#ff3333) ^i(/home/rps/.xmonad/bitmaps/net_up_03.xbm)${upspeed enp8s0}
-
-^i(/home/rps/.xmonad/bitmaps/cpu.xbm) ${exec uptime | cut -b54-58 | tr -d ,}   ^i(/home/rps/.xmonad/bitmaps/clock.xbm)^fg(\#ebac54) ${time %b %e, %-I:%M %P    }
+^fg(\#AB4642)FUNDS:^fg() $$${execp /home/rps/sh/balance}    ^fg(\#AB4642)ZPOOL:^fg() ${execp /home/rps/sh/is_degraded}    ^fg(\#AB4642)RAIN:^fg() ${execp cat /tmp/weather | cut -d , -f 1}%     ^fg(\#AB4642)SKY:^fg() ${execp cat /tmp/weather | cut -d , -f 2}    ^fg(\#AB4642)TEMP:^fg() ${execp cat /tmp/weather | cut -d , -f 3}°F    ^fg(\#AB4642)CPU:^fg() ${execp /home/rps/sh/loadavg}      ^fg(\#ebac54)${time %b %e, %-I:%M %P}  
